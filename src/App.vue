@@ -1,4 +1,5 @@
 <template>
+  <header-common />
 
   <router-view/>
 </template>
@@ -25,3 +26,14 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+<script>
+import HeaderCommon from '@/components/layout/HeaderCommon.vue';
+
+export default {
+    component: {
+        HeaderCommon
+    },
+    components: { HeaderCommon }
+}
+</script>
+
