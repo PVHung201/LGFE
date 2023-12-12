@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import RegisterMember from '../components/member/RegisterMember.vue'
 import listMember from '../components/member/ListMember.vue'
+import HeaderCommon from '../components/layout/HeaderCom.vue'
+import RegisterMember from '../components/member/RegisterMember.vue'
+
 
 const routes = [
   {
@@ -17,16 +19,22 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterMember,
-  },
 
   {
     path: '/list',
     name: 'listMember',
     component: listMember
+  },
+
+  {
+    path: '/header',
+    name: 'headerCommon',
+    component: HeaderCommon
+  },
+  {
+    path: '/registerMem',
+    name: 'register',
+    component: RegisterMember
   }
   
 ]

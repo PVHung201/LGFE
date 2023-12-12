@@ -7,7 +7,6 @@ import axios from 'axios'
 
 
 const app = createApp(App);
-app.use(vuetify)
 app.use(router)
 app.mount('#app')
 window.axios = require('axios');
@@ -16,6 +15,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 window.axios =axios;
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

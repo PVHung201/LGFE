@@ -1,45 +1,49 @@
 <template>
   <!-- <header-common /> -->
-<FileCommon/>
-    <router-view/>
+  
+  <div id="app">
+  <div id="wrapper">
 
+    
+    <!-- Sidebar -->
+      <SideBar/>
+    <!-- Sidebar -->
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+          <HeaderCom/>
+        <!-- Topbar -->
+
+        <div class="container-fluid" id="container-wrapper">
+          <router-view></router-view>
+        </div>
+      </div>
+      <!--Footer-->
+      <FooterCom/>
+
+
+    </div>
+  </div>
+</div>
 
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-}
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 <script>
 
-
-// import HeaderCommon from '@/components/layout/HeaderCommon.vue';
-import FileCommon from '@/components/layout/FileCommon.vue'
+import HeaderCom from '@/components/layout/HeaderCom.vue'
+import FooterCom from '@/components/layout/FooterCom.vue'
+import SideBar from '@/components/layout/SideBar.vue'
 
 export default {
     component: {
-        // HeaderCommon,
-        FileCommon
+      HeaderCom,
+      FooterCom,
+      SideBar
     },
-    components: {FileCommon }
+    components: { HeaderCom, FooterCom, SideBar}
 }
 </script>
 
