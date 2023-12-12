@@ -124,6 +124,7 @@ export default {
         phone: null,
         email: null
       },
+  
       email1: null,
       email2: null,
       errors:{}
@@ -134,7 +135,7 @@ export default {
   methods:{
     memberInsert(){
       this.form.email= this.email1 + '@' + this.email2;
-      axios.post('https://localhost:8080/api/v1/register', this.form)
+      axios.post('http://localhost:8080/api/v1/register', this.form)
       .then(() => {
         this.$router.push({name: 'home'})
       })
