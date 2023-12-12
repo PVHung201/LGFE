@@ -1,7 +1,9 @@
 <template>
-  <header-common />
+  <!-- <header-common /> -->
+<FileCommon/>
+    <router-view/>
 
-  <router-view/>
+
 </template>
 
 <style>
@@ -27,13 +29,17 @@ nav a.router-link-exact-active {
 }
 </style>
 <script>
-import HeaderCommon from '@/components/layout/HeaderCommon.vue';
+
+
+// import HeaderCommon from '@/components/layout/HeaderCommon.vue';
+import FileCommon from '@/components/layout/FileCommon.vue'
 
 export default {
     component: {
-        HeaderCommon
+        // HeaderCommon,
+        FileCommon
     },
-    components: { HeaderCommon }
+    components: {FileCommon }
 }
 </script>
 
