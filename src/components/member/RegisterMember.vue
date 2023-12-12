@@ -30,7 +30,7 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                <input type="password" class="form-control form-control-lg" placeholder="password" v-model="form.password"/>
+                <input type="password" class="form-control form-control-lg" placeholder="password" v-model="form.password" @input="validatePassword" required/>
 
               </div>
             </div>
@@ -43,10 +43,11 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                <input type="password" class="form-control form-control-lg" placeholder="confirm your password" />
+                <input type="password" class="form-control form-control-lg" placeholder="confirm your password" v-model="confirmPassword" @input="validatePassword"/>
 
               </div>
             </div>
+            <p v-if="errorMessage" style="color:red">{{ errorMessage }}</p>
 
 
             <hr class="mx-n3">
@@ -59,7 +60,7 @@
               </div>
               <div class="col-md-9 pe-5">
 
-                <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name"></textarea>
+                <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name" required></textarea>
 
               </div>
             </div>
@@ -115,18 +116,23 @@
 
 <script>
 
+import axios from "axios";
+
 export default {
   data(){
     return {
       form:{
         id: null,
-        password: null,
+        password: '',
         name: null,
         phone: null,
         email: null
       },
       email1: null,
-      email2: null
+      email2: null,
+      confirmPassword:'',
+      errorMessage: '',
+
 
     }
   },
@@ -134,9 +140,23 @@ export default {
   methods:{
     memberInsert(){
       this.form.email= this.email1 + '@' + this.email2;
-      console.log(this.form)
+      axios.post('http://localhost:8080/api/v1/member/register',this.form)
+      .then(() => {
+        this.$router.push({name: 'home'})
+      })
+      .catch( console.error());
+    },
+
+    validatePassword(){
+      if (this.form.password !== this.confirmPassword) {
+                        this.errorMessage = 'Passwords do not match';
+                        return false;
+                    }
+                    this.errorMessage = '';
+                    return true;
+                },
     }
   }
-}
+
 </script>
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterMember from '../components/member/RegisterMember.vue'
-// import HeaderCommon from '../components/layout/HeaderCommon.vue'
+import listMember from '../components/member/ListMember.vue'
 
 const routes = [
   {
@@ -20,14 +20,15 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: RegisterMember
-  }
+    component: RegisterMember,
+  },
 
-  // {
-  //   path: '/common',
-  //   name: 'HeaderCommon',
-  //   component: HeaderCommon
-  //}
+  {
+    path: '/list',
+    name: 'listMember',
+    component: listMember
+  }
+  
 ]
 
 const router = createRouter({
