@@ -114,7 +114,6 @@
 </template>
 
 <script>
-
 export default {
   data(){
     return {
@@ -126,7 +125,8 @@ export default {
         email: null
       },
       email1: null,
-      email2: null
+      email2: null,
+      errors:{}
 
     }
   },
@@ -134,9 +134,15 @@ export default {
   methods:{
     memberInsert(){
       this.form.email= this.email1 + '@' + this.email2;
-      console.log(this.form)
-    }
+      axios.post('https://localhost:8080/api/v1/register', this.form)
+      .then(() => {
+        this.$router.push({name: 'home'})
+      })
+      .catch(function (error) {
+    console.log(error);
+    });
   }
+}
 }
 </script>
 
