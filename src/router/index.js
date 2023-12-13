@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import listMember from '../components/member/ListMember.vue'
 import HeaderCommon from '../components/layout/HeaderCom.vue'
 import RegisterMember from '../components/member/RegisterMember.vue'
+import LoginPage from '../components/member/LoginPage.vue'
 
 
 const routes = [
@@ -35,6 +36,11 @@ const routes = [
     path: '/registerMem',
     name: 'register',
     component: RegisterMember
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginPage
   }
   
 ]

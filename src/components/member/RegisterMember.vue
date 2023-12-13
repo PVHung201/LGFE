@@ -31,8 +31,8 @@
                 <div class="col-md-9 pe-5">
 
                   <input type="password" class="form-control form-control-lg" placeholder="password"
-                    v-model="form.password" @change="checkInputPw()" />
-                    <small class="text-danger col-md-9" v-if="hasError">The password is not formatted correctly</small>
+                    v-model="form.password" @change="checkInputPw()" @input="validatePassword" v-bind:class="{'is-invalid': hasErrorNo}"/>
+                    <small class="text-danger col-md-9" v-if="hasErrorNo">The password is not formatted correctly</small>
 
                 </div>
 
@@ -48,7 +48,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="password" class="form-control form-control-lg" placeholder="confirm your password" />
+                  <input type="password" class="form-control form-control-lg" placeholder="confirm your password" @input="validatePassword" v-model="confirmPassword"/>
+                  <small class="text-danger col-md-9" v-if="passwordMismatch">The password must be same</small>
+
 
                 </div>
               </div>
@@ -64,7 +66,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name" @change="checkInputNm()" v-bind:class="{'is-invalid': hasErrorNm}"></textarea>
+                  <small class="text-danger col-md-9" v-if="hasErrorNm">The name is not formatted correctly</small>
 
                 </div>
               </div>
@@ -80,7 +83,9 @@
                 <div class="col-md-9 pe-5">
 
                   <textarea class="form-control" rows="3" placeholder="type your mobiphone"
-                    v-model="form.phone"></textarea>
+                    v-model="form.phone" @change="checkInputPh()" v-bind:class="{'is-invalid': hasErrorPhone}" ></textarea>
+                    <small class="text-danger col-md-9" v-if="hasErrorPhone">The name is not formatted correctly</small>
+
 
                 </div>
               </div>
@@ -123,7 +128,10 @@
 <script>
 import axios from "axios"
 
+
+
 export default {
+
   data() {
     return {
       form: {
@@ -136,20 +144,24 @@ export default {
 
       email1: null,
       email2: null,
+      confirmPassword: null,
       errors: {},
-      hasError: false
+      hasErrorNo: false,
+      hasErrorNm: false,
+      hasErrorPhone: false,
+      passwordMismatch: false,
 
     }
   },
 
   // watch: {
-  //   hasError: false
+  //   hasErrorNo: false
   // },
 
   methods: {
     memberInsert() {
       this.form.email = this.email1 + '@' + this.email2;
-      axios.post('http://localhost:8080/api/v1/register', this.form)
+      axios.post('http://localhost:8080/api/v1/member/register', this.form)
         .then(() => {
           this.$router.push({ name: 'home' })
         })
@@ -166,11 +178,15 @@ export default {
       const onlySpecialChar = /[!@#$%^&*]/.test(this.form.password)
       const lengPw = this.form.password.length
 
+      if(lengPw <5){
+        this.hasErrorNo=true
+        return
+      }
 
       //check if password have strange characters
       if (!regex.test(this.form.password)) {
-        this.hasError = true
-        console.log(this.hasError)
+        this.hasErrorNo = true
+        console.log(this.hasErrorNo)
 
         console.log("password khong thoa man")
         return
@@ -180,13 +196,13 @@ export default {
       const typeCount = [onlyLetter, onlyNm, onlySpecialChar].filter(Boolean).length;
 
       if (typeCount == 2 && (lengPw <= 10 || lengPw >= 20)) {
-        this.hasError = true
+        this.hasErrorNo = true
         console.log("password must be between 10 and 20")
         return
       }
 
       if (typeCount == 3 && (lengPw <= 8 || lengPw >= 20)) {
-        this.hasError = true
+        this.hasErrorNo = true
 
         console.log("password must be between 8 and 20")
         return
@@ -197,7 +213,7 @@ export default {
       if (ListNmInPw != null) {
         ListNmInPw.forEach(element => {
           if (element.length > 3) {
-            this.hasError = true
+            this.hasErrorNo = true
 
             console.log("the password must not be more than 3 number chracters consecutive")
             return
@@ -205,10 +221,21 @@ export default {
         });
       }
 
-      this.hasError = false
+      this.hasErrorNo = false
 
 
+    },
+    checkInputNm(){
+      return /^[a-zA-Z]+$/.test(this.form.name) ? this.hasErrorNm = false : this.hasErrorNm = true
+    },
+
+    checkInputPh(){
+      return /^\d+$/.test(this.form.phone) ? this.hasErrorPhone = false : this.hasErrorPhone = true
+    },
+    validatePassword() {
+      this.passwordMismatch = this.form.password !== this.confirmPassword;
     }
+
 
   }
 
