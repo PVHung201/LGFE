@@ -56,8 +56,10 @@
 <script type="text/javascript">
 	
 import axios from 'axios'
+import User from '../../helpers/User'
 
   export default {
+
     // created(){
     //   if (User.loggedIn()) {
     //     this.$router.push({name: 'home'})
@@ -83,6 +85,7 @@ import axios from 'axios'
       .then(res => {
       //  User.responseAfterLogin(res)
         console.log(res.data)
+        User.responseAfterLogin(res)
         //this.$router.push({ name: 'home'})
       })
 

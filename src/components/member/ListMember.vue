@@ -105,8 +105,12 @@
 
 <script>
 import axios from "axios"
+import User from '../../helpers/User'
+
 
 export default{
+
+    
   data(){
     return{
       members:[],
@@ -115,6 +119,10 @@ export default{
 
   created(){
     this.allMember();
+
+    if (!User.loggedIn()) {
+        this.$router.push({name: '/'})
+      }
   },
 
   methods:{

@@ -15,7 +15,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="number" class="form-control form-control-lg" v-model="form.id" minlength="4" />
+                  <input type="text"  class="form-control form-control-lg" v-model="form.id" @change="checkInputId"/>
+                  <small class="text-danger col-md-9" v-if="hasErrorId">The id is not formatted correctly</small>
+
 
                 </div>
               </div>
@@ -114,7 +116,7 @@
               <hr class="mx-n3">
 
               <div class="px-5 py-4">
-                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                <button type="submit" :disabled="!isvalid" class="btn btn-primary btn-lg">Register</button>
               </div>
             </div>
           </div>
@@ -146,10 +148,12 @@ export default {
       email2: null,
       confirmPassword: null,
       errors: {},
+      hasErrorId: false,
       hasErrorNo: false,
       hasErrorNm: false,
       hasErrorPhone: false,
       passwordMismatch: false,
+      isValid: false
 
     }
   },
@@ -160,6 +164,8 @@ export default {
 
   methods: {
     memberInsert() {
+      this.isValid = this.hasErrorId && this.hasErrorNo && this.hasErrorNm && this.hasErrorPhone && this.passwordMismatch;
+
       this.form.email = this.email1 + '@' + this.email2;
       axios.post('http://localhost:8080/api/v1/member/register', this.form)
         .then(() => {
@@ -168,6 +174,14 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+
+    checkInputId(){
+        if(!( /^\d+$/.test(this.form.id)) || this.form.id.length < 5){
+          this.hasErrorId = true
+          return
+        }
+        this.hasErrorId = false
     },
     checkInputPw() {
 
@@ -210,18 +224,23 @@ export default {
 
 
       let ListNmInPw = this.form.password.match(/\d+/g); // list the digits contained in password
+
+      let runIntoList = 0
       if (ListNmInPw != null) {
         ListNmInPw.forEach(element => {
           if (element.length > 3) {
+            
             this.hasErrorNo = true
-
+            runIntoList = 1
             console.log("the password must not be more than 3 number chracters consecutive")
-            return
           }
         });
       }
 
-      this.hasErrorNo = false
+      if(runIntoList == 0){
+        this.hasErrorNo = false
+
+      }
 
 
     },
