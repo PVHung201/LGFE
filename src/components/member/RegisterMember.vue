@@ -15,8 +15,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="text"  class="form-control form-control-lg" v-model="form.id" @change="checkInputId"/>
-                  <small class="text-danger col-md-9" v-if="hasErrorId">The id is not formatted correctly</small>
+                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId" />
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorId">The id is not formatted correctly</small>
 
 
                 </div>
@@ -33,8 +33,9 @@
                 <div class="col-md-9 pe-5">
 
                   <input type="password" class="form-control form-control-lg" placeholder="password"
-                    v-model="form.password" @change="checkInputPw()" @input="validatePassword" v-bind:class="{'is-invalid': hasErrorNo}"/>
-                    <small class="text-danger col-md-9" v-if="hasErrorNo">The password is not formatted correctly</small>
+                    v-model="form.password" @change="checkInputPw()" @input="validatePassword"
+                    v-bind:class="{ 'is-invalid': errors.hasErrorNo }" />
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorNo">The password is not formatted correctly</small>
 
                 </div>
 
@@ -50,8 +51,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="password" class="form-control form-control-lg" placeholder="confirm your password" @input="validatePassword" v-model="confirmPassword"/>
-                  <small class="text-danger col-md-9" v-if="passwordMismatch">The password must be same</small>
+                  <input type="password" class="form-control form-control-lg" placeholder="confirm your password"
+                    @input="validatePassword" v-model="confirmPassword" />
+                  <small class="text-danger col-md-9" v-if="errors.passwordMismatch">The password must be same</small>
 
 
                 </div>
@@ -68,8 +70,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name" @change="checkInputNm()" v-bind:class="{'is-invalid': hasErrorNm}"></textarea>
-                  <small class="text-danger col-md-9" v-if="hasErrorNm">The name is not formatted correctly</small>
+                  <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name" @change="checkInputNm()"
+                    v-bind:class="{ 'is-invalid': errors.hasErrorNm }"></textarea>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorNm">The name is not formatted correctly</small>
 
                 </div>
               </div>
@@ -84,9 +87,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="type your mobiphone"
-                    v-model="form.phone" @change="checkInputPh()" v-bind:class="{'is-invalid': hasErrorPhone}" ></textarea>
-                    <small class="text-danger col-md-9" v-if="hasErrorPhone">The name is not formatted correctly</small>
+                  <textarea class="form-control" rows="3" placeholder="type your mobiphone" v-model="form.phone"
+                    @change="checkInputPh()" v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"></textarea>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">The name is not formatted correctly</small>
 
 
                 </div>
@@ -116,7 +119,7 @@
               <hr class="mx-n3">
 
               <div class="px-5 py-4">
-                <button type="submit" :disabled="!isvalid" class="btn btn-primary btn-lg">Register</button>
+                <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">Register</button>
               </div>
             </div>
           </div>
@@ -128,11 +131,12 @@
     
     
 <script>
-import axios from "axios"
+ import axios from "axios"
 
 
 
 export default {
+
 
   data() {
     return {
@@ -147,24 +151,34 @@ export default {
       email1: null,
       email2: null,
       confirmPassword: null,
-      errors: {},
-      hasErrorId: false,
-      hasErrorNo: false,
-      hasErrorNm: false,
-      hasErrorPhone: false,
-      passwordMismatch: false,
-      isValid: false
+      errors: {
+        hasErrorId: false,
+        hasErrorNo: false,
+        hasErrorNm: false,
+        hasErrorPhone: false,
+        passwordMismatch: false
+      },
+      isvalid: true
+
 
     }
   },
 
-  // watch: {
-  //   hasErrorNo: false
-  // },
+
+  watch: {
+    errors: {
+      handler() {
+        this.isvalid = this.errors.hasErrorId || this.errors.hasErrorNo || this.errors.hasErrorNm || this.errors.hasErrorPhone || this.errors.passwordMismatch
+      },
+      deep: true
+    },
+
+
+
+  },
 
   methods: {
     memberInsert() {
-      this.isValid = this.hasErrorId && this.hasErrorNo && this.hasErrorNm && this.hasErrorPhone && this.passwordMismatch;
 
       this.form.email = this.email1 + '@' + this.email2;
       axios.post('http://localhost:8080/api/v1/member/register', this.form)
@@ -176,12 +190,12 @@ export default {
         });
     },
 
-    checkInputId(){
-        if(!( /^\d+$/.test(this.form.id)) || this.form.id.length < 5){
-          this.hasErrorId = true
-          return
-        }
-        this.hasErrorId = false
+    checkInputId() {
+      if (!(/^\d+$/.test(this.form.id)) || this.form.id.length < 5) {
+        this.errors.hasErrorId = true
+        return
+      }
+      this.errors.hasErrorId = false
     },
     checkInputPw() {
 
@@ -192,15 +206,15 @@ export default {
       const onlySpecialChar = /[!@#$%^&*]/.test(this.form.password)
       const lengPw = this.form.password.length
 
-      if(lengPw <5){
-        this.hasErrorNo=true
+      if (lengPw < 5) {
+        this.errors.hasErrorNo = true
         return
       }
 
       //check if password have strange characters
       if (!regex.test(this.form.password)) {
-        this.hasErrorNo = true
-        console.log(this.hasErrorNo)
+        this.errors.hasErrorNo = true
+        console.log(this.errors.hasErrorNo)
 
         console.log("password khong thoa man")
         return
@@ -210,13 +224,13 @@ export default {
       const typeCount = [onlyLetter, onlyNm, onlySpecialChar].filter(Boolean).length;
 
       if (typeCount == 2 && (lengPw <= 10 || lengPw >= 20)) {
-        this.hasErrorNo = true
+        this.errors.hasErrorNo = true
         console.log("password must be between 10 and 20")
         return
       }
 
       if (typeCount == 3 && (lengPw <= 8 || lengPw >= 20)) {
-        this.hasErrorNo = true
+        this.errors.hasErrorNo = true
 
         console.log("password must be between 8 and 20")
         return
@@ -229,30 +243,30 @@ export default {
       if (ListNmInPw != null) {
         ListNmInPw.forEach(element => {
           if (element.length > 3) {
-            
-            this.hasErrorNo = true
+
+            this.errors.hasErrorNo = true
             runIntoList = 1
             console.log("the password must not be more than 3 number chracters consecutive")
           }
         });
       }
 
-      if(runIntoList == 0){
-        this.hasErrorNo = false
+      if (runIntoList == 0) {
+        this.errors.hasErrorNo = false
 
       }
 
 
     },
-    checkInputNm(){
-      return /^[a-zA-Z]+$/.test(this.form.name) ? this.hasErrorNm = false : this.hasErrorNm = true
+    checkInputNm() {
+      return /^[a-zA-Z]+$/.test(this.form.name) ? this.errors.hasErrorNm = false : this.errors.hasErrorNm = true
     },
 
-    checkInputPh(){
-      return /^\d+$/.test(this.form.phone) ? this.hasErrorPhone = false : this.hasErrorPhone = true
+    checkInputPh() {
+      return /^\d+$/.test(this.form.phone) ? this.errors.hasErrorPhone = false : this.errors.hasErrorPhone = true
     },
     validatePassword() {
-      this.passwordMismatch = this.form.password !== this.confirmPassword;
+      this.errors.passwordMismatch = this.form.password !== this.confirmPassword;
     }
 
 
