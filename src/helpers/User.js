@@ -22,6 +22,10 @@ class User {
         return this.hasToken()
     }
 
+    getToken(){
+        return localStorage.getItem('token');
+    }
+
 }
 
 const userIns = new User();

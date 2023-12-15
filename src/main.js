@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
+import jwtInterceptor from './service/jwtInterceptor'
 
-
+jwtInterceptor();
 
 
 const app = createApp(App);

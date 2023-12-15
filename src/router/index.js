@@ -4,7 +4,6 @@ import listMember from '../components/member/ListMember.vue'
 import HeaderCommon from '../components/layout/HeaderCom.vue'
 import RegisterMember from '../components/member/RegisterMember.vue'
 import LoginPage from '../components/member/LoginPage.vue'
-import paginatePage from '../components/member/LoginPage.vue'
 
 
 const routes = [
@@ -43,11 +42,11 @@ const routes = [
     name: 'login',
     component: LoginPage
   },
-  {
-    path: '/paginate',
-    name: 'paginate',
-    component: paginate
-  }
+  // {
+  //   path: '/paginate',
+  //   name: 'paginate',
+  //   component: paginate
+  // }
   
 ]
 
