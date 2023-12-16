@@ -3,7 +3,6 @@ class Token{
     isValid(token){
      const payload = this.payload(token)
      if (payload) {
-        console.log("payload.iss: " + payload.iss)
       return true 
      }
      return false
