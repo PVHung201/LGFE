@@ -60,11 +60,11 @@ import User from '../../helpers/User'
 
   export default {
 
-    // created(){
-    //   if (User.loggedIn()) {
-    //     this.$router.push({name: 'home'})
-    //   }
-    // },
+    created(){
+      if (User.loggedIn()) {
+        this.$router.push({name: 'listMember'})
+      }
+    },
 
     data(){
     return {
@@ -83,13 +83,14 @@ import User from '../../helpers/User'
         }
       })
       .then(res => {
-      //  User.responseAfterLogin(res)
-        console.log(res.data)
         User.responseAfterLogin(res)
-        //this.$router.push({ name: 'home'})
+        this.$router.push({ name: 'listMember'})
       })
 
-       .catch(error =>this.errors = error.response.data.errors)
+       .catch(error => 
+        this.errors = error.response.data.errorsF
+ 
+      )
 
     }
   }

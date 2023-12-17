@@ -87,8 +87,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="type your mobiphone" v-model="form.phone"
-                    @change="checkInputPh()" v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"></textarea>
+                  <input type = "number" class="form-control" rows="3" placeholder="type your mobiphone" v-model="form.mobilePhone"
+                    @change="checkInputPh()" v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"/>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">The name is not formatted correctly</small>
 
 
@@ -121,6 +121,8 @@
               <div class="px-5 py-4">
                 <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">Register</button>
               </div>
+              <small class="text-danger col-md-9" v-if="errorAfterRegis">{{errorAfterRegis}}</small>
+
             </div>
           </div>
         </div>
@@ -138,13 +140,14 @@
 export default {
 
 
+
   data() {
     return {
       form: {
         id: null,
         password: null,
         name: null,
-        phone: null,
+        mobilePhone: null,
         email: null
       },
 
@@ -158,6 +161,7 @@ export default {
         hasErrorPhone: false,
         passwordMismatch: false
       },
+      errorAfterRegis: '',
       isvalid: true
 
 
@@ -183,8 +187,9 @@ export default {
         .then(() => {
           this.$router.push({ name: 'home' })
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch((error) => {
+          console.log(error),
+          this.errorAfterRegis = error.response.data.error
         });
     },
 
@@ -261,7 +266,7 @@ export default {
     },
 
     checkInputPh() {
-      return /^\d+$/.test(this.form.phone) ? this.errors.hasErrorPhone = false : this.errors.hasErrorPhone = true
+      return /^\d+$/.test(this.form.mobilePhone) ? this.errors.hasErrorPhone = false : this.errors.hasErrorPhone = true
     },
     validatePassword() {
       this.errors.passwordMismatch = this.form.password !== this.confirmPassword;

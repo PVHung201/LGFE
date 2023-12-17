@@ -7,11 +7,11 @@ const jwtInterceptor = () => {
         axios.interceptors.request.use(function (config) {
                 config.headers.Authorization =`Bearer ${User.getToken()}`
                 return config;
-              }, function (error) {
+              }, function () {
                 // Do something with request error
-                return Promise.reject(error);
+                console.log("error into jwtINterceptor")
               });
-        }
+        } 
 }
 
 export default jwtInterceptor;

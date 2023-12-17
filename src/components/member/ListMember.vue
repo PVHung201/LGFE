@@ -226,13 +226,9 @@ export default {
     this.search()
   },
   methods: {
-    // allMember() {
-    //   axios.get('http://localhost:8080/api/v1/member/list')
-    //     .then(({ data }) => (this.members = data))
-    //     .catch(console.error());
-    // },
+ 
     checkInputId() {
-      let lengthId = this.searchForm.id.length;
+      let lengthId = this.searchForm.id.toString().length;
       if (lengthId > 0 && lengthId < 3) {
         this.hasErrors.hasErrorId = true;
         return;

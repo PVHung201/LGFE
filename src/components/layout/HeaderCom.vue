@@ -1,14 +1,12 @@
 <template>
-   <nav id ="topbar" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" v-show="$route.path === '/' || $route.path === '/register' || $route.path === '/forget' ?false : true" style="display:none;">
+   <nav v-show ="$route.path === '/registerMem' || $route.path === '/login' ? false : true"  
+   id ="topbar" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="display: none;">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
+
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                 aria-labelledby="searchDropdown">
                 <form class="navbar-search">
@@ -42,19 +40,19 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    <div class="small text-gray-500">December 25, 2023</div>
+                    <span class="font-weight-bold">Nguyen Van A has been added!</span>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
+                    <div class="small text-gray-500">December 20, 2023</div>
+                    <span class="font-weight-bold">Ngo Anh Hoang has been added!</span>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -64,8 +62,8 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
+                    <div class="small text-gray-500">December 2, 10</div>
+                    Nam Van B has been deleted
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
@@ -84,7 +82,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                    <img class="rounded-circle" src="../../../public/assets121/img/man.png" style="max-width: 60px" alt="">
                     <div class="status-indicator bg-success"></div>
                   </div>
                   <div class="font-weight-bold">
@@ -95,7 +93,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="{{asset('backend/img/girl.png')}}" style="max-width: 60px" alt="">
+                    <img class="rounded-circle" src="../../../public/assets121/img/girl.png" style="max-width: 60px" alt="">
                     <div class="status-indicator bg-default"></div>
                   </div>
                   <div>
@@ -158,8 +156,8 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="{{asset('backend/img/boy.png')}}" style="max-width: 60px">
-  <router-link to ="/logout" class="ml-2 d-none d-lg-inline text-white small">Logout</router-link>
+                <img class="img-profile rounded-circle" src="../../../public/assets121/img/man.png" style="max-width: 60px">
+  <router-link to ="/logout" class="ml-2 d-none d-lg-inline text-white small"></router-link>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -175,7 +173,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="login.html">
+                <a class="dropdown-item" href="/logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -183,4 +181,5 @@
             </li>
           </ul>
         </nav>
-</template>>
+</template>
+

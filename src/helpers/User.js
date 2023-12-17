@@ -1,6 +1,7 @@
 import tokenInstance from './Token'
 import appStoragaIns from './AppStorage'
 
+
 class User {
 
     responseAfterLogin(res){
@@ -19,11 +20,24 @@ class User {
     }
 
     loggedIn(){
-        return this.hasToken()
+        return this.hasToken() && !this.isExpired()
     }
 
     getToken(){
         return localStorage.getItem('token');
+    }
+
+    isExpired(){
+        const storeToken = localStorage.getItem('token');
+        const jwtPayLoad = tokenInstance.payload(storeToken)
+        if(jwtPayLoad.exp < Date.now()/1000){
+            appStoragaIns.clear()
+            return true
+        }
+        return false
+    }
+    direcLogin(){
+        return this.$router.push({ name: 'login' });
     }
 
 }
