@@ -109,7 +109,13 @@
                     <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 ">Inquiry</button>
                   </div>
                   <div class="btn-group ">
-                    <button type="button" class="btn btn-primary btn-lg mr-3 ">Excel</button>
+
+                    <download-excel class="btn btn-default" :data="atob(members)" :fields="json_fields"
+                      worksheet="My Worksheet" name="filename.xlsx">
+                      <button type="button" class="btn btn-primary btn-lg mr-3 ">Excel</button>
+                    </download-excel>
+
+                   
                   </div>
                 </div>
               </div>
@@ -132,39 +138,39 @@
           <div class="table-responsive p-3">
 
             <div class="table-responsive p-3">
-            <table class="table align-items-center table-flush" id="dataTable">
-              <thead class="thead-light">
-                <tr>
-                  <th>Membership Number</th>
-                  <th>ID</th>
-                  <th>name</th>
-                  <th>Mobile phhone number</th>
-                  <th>email</th>
-                  <th>Join date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="member in members" :key="member.memberNo">
-                  <td>{{ member.memberNo }}</td>
-                  <td>{{ member.id }}</td>
-                  <td>{{ member.name }}</td>
-                  <td>{{ member.mobilePhone }}</td>
-                  <td>{{ member.email }}</td>
-                  <td>{{ member.joinDate.slice(0, 10) }}</td>
-                </tr>
-              </tbody>
-            </table>
+              <table class="table align-items-center table-flush" id="dataTable">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Membership Number</th>
+                    <th>ID</th>
+                    <th>name</th>
+                    <th>Mobile phone number</th>
+                    <th>email</th>
+                    <th>Join date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="member in members" :key="member.memberNo">
+                    <td>{{ member.memberNo }}</td>
+                    <td>{{ member.id }}</td>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.mobilePhone }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.joinDate.slice(0, 10) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--Paginate Page-->
+
+            <PaginatePage @changePage="changePage" :page="count" />
+
+            <!--End Paginate page-->
           </div>
-                  <!--Paginate Page-->
-
-        <PaginatePage @changePage="changePage" :page="count" />
-
-<!--End Paginate page-->
-          </div>
 
 
-</div>
         </div>
+      </div>
 
     </div>
 
@@ -180,6 +186,7 @@
 import axios from "axios"
 import User from '../../helpers/User'
 import PaginatePage from "./paginatePage.vue"
+// import JsonExcel from "vue-json-excel3"
 
 
 
@@ -203,9 +210,37 @@ export default {
         hasErrorId: false,
         hasErrorNm: false
       },
-      count: null
+      count: null,
+
+      json_fields: {
+        'Membership Number': 'memberNo',
+        'ID': 'id',
+        'Name': 'name',
+        'Mobile phonge number': 'mobilePhone',
+        'email': 'email',
+        'Join Date': 'joinDate'
+      },
+
+      json_data: [        {
+            "memberNo": 10,
+            "id": "11334",
+            "name": "phanvanhung",
+            "mobilePhone": "044484894",
+            "email": "pvhung@nate.com",
+            "joinDate": "2023-12-16T19:35:01.958+00:00"
+        }],
+      json_meta: [
+        [
+          {
+            key: "charset",
+            value: "utf-8",
+          }
+        ]
+      ]
+
     };
   },
+
   watch: {
     hasErrors: {
       handler() {
@@ -213,7 +248,15 @@ export default {
       },
       deep: true
     },
+
+    members:{
+      addJsonData(){
+        this.json_data = this.members
+      },
+      deep: true
+    }
   },
+
   created() {
     if (!User.loggedIn()) {
       this.$router.push({ name: 'login' });
@@ -226,7 +269,7 @@ export default {
     this.search()
   },
   methods: {
- 
+
     checkInputId() {
       let lengthId = this.searchForm.id.toString().length;
       if (lengthId > 0 && lengthId < 3) {

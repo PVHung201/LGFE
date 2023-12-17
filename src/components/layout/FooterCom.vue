@@ -2,8 +2,8 @@
           <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>copyright &copy; - developed by
-              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
+            <span>Life Care group employee management system of LG CNS
+              <b><a href="https://www.lgcnsvn.com/" target="_blank">LG CNS</a></b>
             </span>
           </div>
         </div>

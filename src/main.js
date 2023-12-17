@@ -4,6 +4,7 @@ import router from './router'
 import axios from 'axios'
 import jwtInterceptor from './service/jwtInterceptor'
 import jQuery from 'jquery'
+import JsonExcel from "vue-json-excel3";
 
 jwtInterceptor();
 
@@ -12,6 +13,7 @@ const app = createApp(App);
 app.use(router)
 app.mount('#app')
 app.use(jQuery)
+app.component("downloadExcel", JsonExcel);
 window.axios = require('axios');
 
 //import User class
