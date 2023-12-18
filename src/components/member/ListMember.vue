@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">List Member</h1>
+      <h1 class="h3 mb-0 text-gray-800">{{$t('List Member')}}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./">Home</a></li>
         <li class="breadcrumb-item">Member</li>
-        <li class="breadcrumb-item active" aria-current="page">List Member</li>
+        <li class="breadcrumb-item active" aria-current="page">{{$t('List Member')}}</li>
       </ol>
     </div>
 
@@ -63,7 +63,7 @@
                     <div class="col-3 text-center">name</div>
                     <div class="col">
                       <input type="text" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter name" v-model="searchForm.name" @change="checkInputNm"
+                        :placeholder="$t('Enter name')" v-model="searchForm.name" @change="checkInputNm"
                         v-bind:class="{ 'is-invalid': hasErrors.hasErrorNm }">
                       <small class="text-danger col-md-9" v-if="hasErrors.hasErrorNm">The name is not formatted
                         correctly</small>
@@ -287,10 +287,10 @@ export default {
       this.hasErrors.hasErrorNm = false;
     },
     search() {
-      axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
-        .then(({ data }) => (this.members = data.listMemberRen,
-          this.count = data.count))
-        .catch(console.error());
+      // axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
+      //   .then(({ data }) => (this.members = data.listMemberRen,
+      //     this.count = data.count))
+      //   .catch(console.error());
     },
     changePage(n) {
       this.searchForm.page = n

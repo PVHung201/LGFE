@@ -8,7 +8,7 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                    <h1 class="h4 text-gray-900 mb-4">{{$t('Login')}}</h1>
                   </div>
       <form class="user" @submit.prevent="login">
         <div class="form-group">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block">Login </button>
+          <button type="submit" class="btn btn-primary btn-block">{{$t('Login')}}</button>
           <small class="text-danger col-md-9" v-if="errorAfterLog">{{errorAfterLog}}</small>
 
         </div>
@@ -92,7 +92,7 @@ import User from '../../helpers/User'
 
       .catch((error) => {
           console.log(error),
-          this.errorAfterRegis = error.response.data.error
+          this.errorAfterLog = error.response.data.error
         });
 
     }
