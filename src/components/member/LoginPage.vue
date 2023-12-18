@@ -29,6 +29,8 @@
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Login </button>
+          <small class="text-danger col-md-9" v-if="errorAfterLog">{{errorAfterLog}}</small>
+
         </div>
         <hr>
         
@@ -72,7 +74,8 @@ import User from '../../helpers/User'
         id: null,
         password: null
       },
-      errors:{}
+      errors:{},
+      errorAfterLog: ''
     }
   }, 
   methods:{
@@ -87,10 +90,10 @@ import User from '../../helpers/User'
         this.$router.push({ name: 'listMember'})
       })
 
-       .catch(error => 
-        this.errors = error.response.data.errorsF
- 
-      )
+      .catch((error) => {
+          console.log(error),
+          this.errorAfterRegis = error.response.data.error
+        });
 
     }
   }

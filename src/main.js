@@ -6,20 +6,22 @@ import jwtInterceptor from './service/jwtInterceptor'
 import jQuery from 'jquery'
 import JsonExcel from "vue-json-excel3";
 
-jwtInterceptor();
 
+window.axios = require('axios');
+window.axios =axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const app = createApp(App);
 app.use(router)
 app.mount('#app')
 app.use(jQuery)
 app.component("downloadExcel", JsonExcel);
-window.axios = require('axios');
+
+jwtInterceptor();
+
 
 //import User class
 import User from './helpers/User'
 window.User = User
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios =axios;
 
