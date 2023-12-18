@@ -110,10 +110,10 @@
                   </div>
                   <div class="btn-group ">
 
-                    <download-excel class="btn btn-default" :data="atob(members)" :fields="json_fields"
-                      worksheet="My Worksheet" name="filename.xlsx">
-                      <button type="button" class="btn btn-primary btn-lg mr-3 ">Excel</button>
-                    </download-excel>
+                    <!-- <download-excel class="btn btn-default" :data="members" :fields="json_fields"
+                     worksheet="My Worksheet" name="filename.xlsx"> -->
+                      <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">Excel</button>
+                    <!-- </download-excel> -->
 
                    
                   </div>
@@ -296,7 +296,23 @@ export default {
       this.searchForm.page = n
       this.search()
 
-    }
+    },
+    exportExcel(){
+       axios.post('http://localhost:8080/api/v1/member/exportExcel', this.searchForm, {
+        responseType: 'blob'
+       })
+      .then(response => {
+        console.log(response);
+        const label = 'ListMember.xlsx';
+         const blob = new Blob([response.data], { type: response.headers['content-type'] })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = label
+        link.click()
+        URL.revokeObjectURL(link.href) 
+      })
+      .catch(console.error())
+;    }
   }
 }
 </script>
