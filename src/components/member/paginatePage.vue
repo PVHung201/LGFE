@@ -2,20 +2,20 @@
   <div class="row">
     <div class="col-sm-12 col-md-5 ">
       <div class="dataTables_info" id="dataTableHover_info" role="status" aria-live="polite">
-        Total of member: {{ page }}</div>
+        {{ $t('Total of member') }}: {{ page }}</div>
     </div>
     <div class="col-sm-12 col-md-7">
       <div class="dataTables_paginate paging_simple_numbers" id="dataTableHover_paginate">
         <ul class="pagination" id="paginate">
 
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">{{ $t('Previous') }}</a></li>
               <li v-for="n in NumberOfPage " :key="n" class="page-item">
 
                 <a class="page-link" href="#" @click="$emit('changePage', n-1)">{{ n }}</a>
               </li>
 
 
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <li class="page-item"><a class="page-link" href="#">{{ $t('Next') }}</a></li>
 
         </ul>
       </div>

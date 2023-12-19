@@ -23,7 +23,7 @@
       <li class="nav-item active">
         <router-link class="nav-link" to="/list">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></router-link
+          <span>{{ $t('Dashboard') }}</span></router-link
         >
       </li>
 
@@ -31,7 +31,7 @@
 
       <router-link to="/registerMem" class="nav-item">
         <a class="nav-link">
-          <i class="far fa-solid fa-id-card"></i> <span>Register</span>
+          <i class="far fa-solid fa-id-card"></i> <span>{{ $t('Register') }}</span>
         </a>
       </router-link>
     </ul>

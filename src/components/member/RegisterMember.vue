@@ -16,7 +16,7 @@
                 <div class="col-md-9 pe-5">
 
                   <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId" />
-                  <small class="text-danger col-md-9" v-if="errors.hasErrorId">The id is not formatted correctly</small>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorId">{{ $t('The id is not formatted correctly') }}</small>
 
 
                 </div>
@@ -27,15 +27,15 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
 
-                  <h6 class="mb-0">Passwords</h6>
+                  <h6 class="mb-0">{{ $t('Password') }}</h6>
 
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="password" class="form-control form-control-lg" placeholder="password"
+                  <input type="password" class="form-control form-control-lg" :placeholder="$t('Password')"
                     v-model="form.password" @change="checkInputPw()" @input="validatePassword"
                     v-bind:class="{ 'is-invalid': errors.hasErrorNo }" />
-                  <small class="text-danger col-md-9" v-if="errors.hasErrorNo">The password is not formatted correctly</small>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorNo">{{ $t('The password is not formatted correctly') }}</small>
 
                 </div>
 
@@ -46,14 +46,14 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
 
-                  <h6 class="mb-0">Reconfirm your password</h6>
+                  <h6 class="mb-0">{{ $t('Reconfirm your password') }}</h6>
 
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="password" class="form-control form-control-lg" placeholder="confirm your password"
+                  <input type="password" class="form-control form-control-lg" :placeholder="$t('confirm your password')"
                     @input="validatePassword" v-model="confirmPassword" />
-                  <small class="text-danger col-md-9" v-if="errors.passwordMismatch">The password must be same</small>
+                  <small class="text-danger col-md-9" v-if="errors.passwordMismatch">{{ $t('The password must be same') }}</small>
 
 
                 </div>
@@ -65,14 +65,14 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
 
-                  <h6 class="mb-0">Name</h6>
+                  <h6 class="mb-0">{{ $t('Name') }}</h6>
 
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="Name" v-model="form.name" @change="checkInputNm()"
+                  <textarea class="form-control" rows="3" :placeholder="$t('Name')" v-model="form.name" @change="checkInputNm()"
                     v-bind:class="{ 'is-invalid': errors.hasErrorNm }"></textarea>
-                  <small class="text-danger col-md-9" v-if="errors.hasErrorNm">The name is not formatted correctly</small>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorNm">{{ $t('The name is not formatted correctly') }}</small>
 
                 </div>
               </div>
@@ -82,14 +82,14 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
 
-                  <h6 class="mb-0">Mobile phone number</h6>
+                  <h6 class="mb-0">{{ $t('Mobile phone number') }}</h6>
 
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type = "number" class="form-control" rows="3" placeholder="type your mobiphone" v-model="form.mobilePhone"
+                  <input type = "number" class="form-control" rows="3" :placeholder="$t('type your mobiphone')" v-model="form.mobilePhone"
                     @change="checkInputPh()" v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"/>
-                  <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">The name is not formatted correctly</small>
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">{{ $t('The name is not formatted correctly') }}</small>
 
 
                 </div>
@@ -98,12 +98,12 @@
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
 
-                  <h6 class="mb-0">email</h6>
+                  <h6 class="mb-0">{{ $t('email') }}</h6>
 
                 </div>
                 <div class="col-md-3 pe-5">
 
-                  <textarea class="form-control" rows="3" placeholder="type you domain email" v-model="email1"></textarea>
+                  <textarea class="form-control" rows="3" :placeholder="$t('type you domain email')" v-model="email1"></textarea>
 
                 </div>
                 <label for="inputState" class="col-md-1 ps-5">@ </label>
@@ -119,7 +119,7 @@
               <hr class="mx-n3">
 
               <div class="px-5 py-4">
-                <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">Register</button>
+                <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">{{ $t('Register') }}</button>
               </div>
               <small class="text-danger col-md-9" v-if="errorAfterRegis">{{errorAfterRegis}}</small>
 

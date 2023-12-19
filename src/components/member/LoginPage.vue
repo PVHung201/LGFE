@@ -13,18 +13,17 @@
       <form class="user" @submit.prevent="login">
         <div class="form-group">
           <input type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
-            placeholder="Enter Id Employee" v-model="form.id">
+          :placeholder="$t('Enter Id Employee')" v-model="form.id">
     <small class="text-danger" v-if="errors.id"> {{ errors.id[0] }} </small>        
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" v-model="form.password">
+          <input type="password" class="form-control" id="exampleInputPassword" :placeholder="$t('Password')" v-model="form.password">
  <small class="text-danger" v-if="errors.password"> {{ errors.password[0] }} </small>
         </div>
         <div class="form-group">
           <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
             <input type="checkbox" class="custom-control-input" id="customCheck">
-            <label class="custom-control-label" for="customCheck">Remember
-              Me</label>
+            <label class="custom-control-label" for="customCheck">{{$t('Remember Me')}}</label>
           </div>
         </div>
         <div class="form-group">
@@ -37,10 +36,10 @@
       </form>
                   <hr>
                   <div class="text-center">
- <router-link to="/register" class="font-weight-bold small">Create an Account!</router-link>
+ <router-link to="/registerMem" class="font-weight-bold small">{{$t('Create an account')}}</router-link>
                   </div>
                   <div class="text-center">
-    <router-link to="/forget" class="font-weight-bold small">Forget Password</router-link>
+    <router-link to="/#" class="font-weight-bold small">{{$t('Forget Password')}}</router-link>
                   </div>
                 </div>
               </div>

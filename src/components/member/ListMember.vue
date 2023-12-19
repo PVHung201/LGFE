@@ -3,8 +3,8 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">{{$t('List Member')}}</h1>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="./">Home</a></li>
-        <li class="breadcrumb-item">Member</li>
+        <li class="breadcrumb-item"><a href="./">{{ $t('Home') }}</a></li>
+        <li class="breadcrumb-item">{{ $t('Member') }}</li>
         <li class="breadcrumb-item active" aria-current="page">{{$t('List Member')}}</li>
       </ol>
     </div>
@@ -24,10 +24,9 @@
                     <div class="col-3 text-center">ID</div>
                     <div class="col">
                       <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter Id" v-model="searchForm.id" @change="checkInputId"
+                        :placeholder="$t('Enter Id')" v-model="searchForm.id" @change="checkInputId"
                         v-bind:class="{ 'is-invalid': hasErrors.hasErrorId }">
-                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorId">The Id is not formatted
-                        correctly</small>
+                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorId">{{ $t('The Id is not formatted correctly') }}</small>
 
                     </div>
                   </div>
@@ -42,10 +41,10 @@
               <div class="col-lg-6 mb-4">
                 <div class="form-group">
                   <div class="d-flex align-items-center">
-                    <div class="col-3 text-center">Mobile Phone number</div>
+                    <div class="col-3 text-center">{{ $t('Mobile Phone number') }}</div>
                     <div class="col">
                       <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter phone number" v-model="searchForm.mobilePhone" required>
+                        :placeholder="$t('Enter phone number')" v-model="searchForm.mobilePhone" required>
                     </div>
                   </div>
                 </div>
@@ -60,13 +59,12 @@
               <div class="col-lg-6 mb-4">
                 <div class="form-group">
                   <div class="d-flex align-items-center">
-                    <div class="col-3 text-center">name</div>
+                    <div class="col-3 text-center">{{ $t('Name') }}</div>
                     <div class="col">
                       <input type="text" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                         :placeholder="$t('Enter name')" v-model="searchForm.name" @change="checkInputNm"
                         v-bind:class="{ 'is-invalid': hasErrors.hasErrorNm }">
-                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorNm">The name is not formatted
-                        correctly</small>
+                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorNm">{{ $t('The name is not formatted orrectly') }}</small>
 
                     </div>
                   </div>
@@ -81,7 +79,7 @@
               <div class="col-lg-6 mb-4">
                 <div class="form-group">
                   <div class="d-flex align-items-center">
-                    <div class="col-3 text-center">Join date</div>
+                    <div class="col-3 text-center">{{ $t('Join date') }}</div>
                     <div class="col">
                       <input type="Date" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                         placeholder="" v-model="searchForm.beginDate">
@@ -106,13 +104,13 @@
               <div class="col-lg-3 mb-4">
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group">
-                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 ">Inquiry</button>
+                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 ">{{ $t('Inquiry') }}</button>
                   </div>
                   <div class="btn-group ">
 
                     <!-- <download-excel class="btn btn-default" :data="members" :fields="json_fields"
                      worksheet="My Worksheet" name="filename.xlsx"> -->
-                      <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">Excel</button>
+                      <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">{{ $t('Excel') }}</button>
                     <!-- </download-excel> -->
 
                    
@@ -141,9 +139,9 @@
               <table class="table align-items-center table-flush" id="dataTable">
                 <thead class="thead-light">
                   <tr>
-                    <th>Membership Number</th>
+                    <th> {{ $t('Membership Number') }}</th>
                     <th>ID</th>
-                    <th>name</th>
+                    <th>Name</th>
                     <th>Mobile phone number</th>
                     <th>email</th>
                     <th>Join date</th>

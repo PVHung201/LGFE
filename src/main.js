@@ -7,11 +7,14 @@ import jwtInterceptor from './service/jwtInterceptor'
 import { createI18n } from 'vue-i18n'
 import EN from './language/en.json'
 import KO from './language/ko.json'
+import User from './helpers/User'
+
 
 
 window.axios = require('axios');
 window.axios =axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.User = User
 
 const app = createApp(App);
 
@@ -24,16 +27,14 @@ const i18n = createI18n({
 
 })
 
+app.config.globalProperties.$t = i18n.global.t;
+app.config.globalProperties.$i18n = i18n.global;
+
 app.use(router)
 app.mount('#app')
 app.use(i18n)
-
 jwtInterceptor();
 
 
-
-//import User class
-import User from './helpers/User'
-window.User = User
 
 
