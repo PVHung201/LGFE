@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-5 ">
       <div class="dataTables_info" id="dataTableHover_info" role="status" aria-live="polite">
-        {{ $t('Total of member') }}: {{ page }}</div>
+        {{$t('Total of member')}}: {{ page }}</div>
     </div>
     <div class="col-sm-12 col-md-7">
       <div class="dataTables_paginate paging_simple_numbers" id="dataTableHover_paginate">

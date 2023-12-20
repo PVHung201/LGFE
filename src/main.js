@@ -11,10 +11,9 @@ import User from './helpers/User'
 
 
 
-window.axios = require('axios');
-window.axios =axios;
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 window.User = User
+
 
 const app = createApp(App);
 
@@ -30,11 +29,10 @@ const i18n = createI18n({
 app.config.globalProperties.$t = i18n.global.t;
 app.config.globalProperties.$i18n = i18n.global;
 
+jwtInterceptor();
+window.axios = require('axios');
+window.axios =axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 app.use(router)
 app.mount('#app')
 app.use(i18n)
-jwtInterceptor();
-
-
-
-

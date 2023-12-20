@@ -1,21 +1,22 @@
 <template>
   <!-- <header-common /> -->
+  <div class="popover" style="left: 1200px; top: 15px">
+    <button class="btn btn-light" @click="swichLanguage('KO')">
+      <img src="../public/assets121/img/korea.jpg" width="16" height="11" loading="lazy">
+      <span class="mg-left-lv2-i">
+        KO </span>
+    </button>
+    <button class="btn btn-light" @click="swichLanguage('EN')">
+      <img src="../public/assets121/img/english.png" width="16" height="11" loading="lazy">
+      <span class="mg-left-lv2-i">
+        English </span>
+    </button>
+  </div>
 
-  <!-- <div class="popover">
-      <button class = "btn btn-light" @click="swichLanguage('KO')">
-        <img src="../public/assets121/img/korea.jpg" width="16" height="11" loading="lazy">
-        <span class="mg-left-lv2-i">
-          Korea </span>
-      </button>
-      <button class = "btn btn-light" @click="swichLanguage('EN')">
-        <img src="../public/assets121/img/english.png" width="16" height="11" loading="lazy">
-        <span class="mg-left-lv2-i">
-          English </span>
-      </button>
-  </div> -->
 
 
   <div id="app">
+
     <div id="wrapper">
       <!-- Sidebar -->
       <SideBar />
@@ -50,7 +51,7 @@ export default {
   setup() {
     onMounted(() => {
       console.log("test run into onMounted")
-      Cookies.set("locale", "KO");
+      // Cookies.set("locale", "KO");
     })
 
   },
@@ -65,12 +66,10 @@ export default {
 
   methods: {
     swichLanguage(lang) {
-      if (this.$i18n) {
-        this.$i18n.locale = lang;
-        return
-      }
+
+      this.$i18n.locale = lang;
+
       Cookies.set("locale", lang);
-      this.$router.go()
 
     }
   }

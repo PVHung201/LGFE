@@ -172,7 +172,7 @@
                   {{ $t('Activity Log') }}
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">
+                <a class="dropdown-item" href="#" @click="logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   {{ $t('Logout') }}
                 </a>
@@ -181,4 +181,20 @@
           </ul>
         </nav>
 </template>
+
+<script type="text/javascript">
+
+export default {
+
+    methods:{
+      logout(){
+        console.log("test logout");
+
+        localStorage.removeItem('token')
+        this.$router.push({ name: 'login' });
+      }
+  
+    }
+  }
+</script>
 

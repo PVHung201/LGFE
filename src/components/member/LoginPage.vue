@@ -90,7 +90,7 @@ import User from '../../helpers/User'
       })
 
       .catch((error) => {
-          console.log(error),
+          console.log(error)
           this.errorAfterLog = error.response.data.error
         });
 

@@ -41,7 +41,7 @@
               <div class="col-lg-6 mb-4">
                 <div class="form-group">
                   <div class="d-flex align-items-center">
-                    <div class="col-3 text-center">{{ $t('Mobile Phone number') }}</div>
+                    <div class="col-3 text-center">{{ $t('Mobile phone number') }}</div>
                     <div class="col">
                       <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                         :placeholder="$t('Enter phone number')" v-model="searchForm.mobilePhone" required>
@@ -141,10 +141,10 @@
                   <tr>
                     <th> {{ $t('Membership Number') }}</th>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Mobile phone number</th>
-                    <th>email</th>
-                    <th>Join date</th>
+                    <th>{{ $t('Name') }}</th>
+                    <th>{{ $t('Mobile phone number') }}</th>
+                    <th>{{ $t('email') }}</th>
+                    <th>{{ $t('Join date') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -285,10 +285,10 @@ export default {
       this.hasErrors.hasErrorNm = false;
     },
     search() {
-      // axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
-      //   .then(({ data }) => (this.members = data.listMemberRen,
-      //     this.count = data.count))
-      //   .catch(console.error());
+      axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
+        .then(({ data }) => (this.members = data.listMemberRen,
+          this.count = data.count))
+        .catch(console.error());
     },
     changePage(n) {
       this.searchForm.page = n
