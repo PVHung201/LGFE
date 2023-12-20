@@ -1,7 +1,7 @@
 <template>
   <!-- <header-common /> -->
 
-  <!-- <div class="popover">
+  <div class="popover">
       <button class = "btn btn-light" @click="swichLanguage('KO')">
         <img src="../public/assets121/img/korea.jpg" width="16" height="11" loading="lazy">
         <span class="mg-left-lv2-i">
@@ -12,7 +12,7 @@
         <span class="mg-left-lv2-i">
           English </span>
       </button>
-  </div> -->
+  </div>
 
 
   <div id="app">
@@ -50,7 +50,7 @@ export default {
   setup() {
     onMounted(() => {
       console.log("test run into onMounted")
-      Cookies.set("locale", "KO");
+      // Cookies.set("locale", "KO");
     })
 
   },
@@ -65,12 +65,9 @@ export default {
 
   methods: {
     swichLanguage(lang) {
-      if (this.$i18n) {
-        this.$i18n.locale = lang;
-        return
-      }
+      this.$i18n.locale = lang;
       Cookies.set("locale", lang);
-      this.$router.go()
+      // this.$router.go()
 
     }
   }
