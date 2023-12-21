@@ -191,9 +191,8 @@
 
 <script>
 import axios from "axios"
-import User from '../../helpers/User'
+// import User from '../../helpers/User'
 import PaginatePage from "./paginatePage.vue"
-// import JsonExcel from "vue-json-excel3"
 
 
 
@@ -264,17 +263,17 @@ export default {
     }
   },
 
-  created() {
-    if (!User.loggedIn()) {
-      this.$router.push({ name: 'login' });
-      return;
-    }
-    let currentDate = new Date();
-    this.searchForm.endDate = currentDate.toISOString().split('T')[0];
-    currentDate.setFullYear(currentDate.getFullYear() - 1);
-    this.searchForm.beginDate = currentDate.toISOString().split('T')[0];
-    this.search()
-  },
+  // created() {
+  //   if (!User.loggedIn()) {
+  //     this.$router.push({ name: 'login' });
+  //     return;
+  //   }
+  //   let currentDate = new Date();
+  //   this.searchForm.endDate = currentDate.toISOString().split('T')[0];
+  //   currentDate.setFullYear(currentDate.getFullYear() - 1);
+  //   this.searchForm.beginDate = currentDate.toISOString().split('T')[0];
+  //   this.search()
+  // },
   methods: {
 
     checkInputId() {

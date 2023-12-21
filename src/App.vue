@@ -1,6 +1,6 @@
 <template>
   <!-- <header-common /> -->
-  <div class="popover" style="left: 1200px; top: 15px">
+  <div class="popover" style="left: 60%; top: 15px">
     <button class="btn btn-light" @click="swichLanguage('KO')">
       <img src="../public/assets121/img/korea.jpg" width="16" height="11" loading="lazy">
       <span class="mg-left-lv2-i">
@@ -15,7 +15,6 @@
 
 
 
-  <div id="app">
 
     <div id="wrapper">
       <!-- Sidebar -->
@@ -36,7 +35,6 @@
         <FooterCom />
       </div>
     </div>
-  </div>
 </template>
 <script>
 
