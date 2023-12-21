@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId" />
+                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId" required />
                   <small class="text-danger col-md-9" v-if="errors.hasErrorId">{{ $t('The id is not formatted correctly') }}</small>
 
 
@@ -39,7 +39,7 @@
 
                   <input type="password" class="form-control form-control-lg" :placeholder="$t('Password')"
                     v-model="form.password" @change="checkInputPw()" @input="validatePassword"
-                    v-bind:class="{ 'is-invalid': errors.hasErrorNo }" />
+                    v-bind:class="{ 'is-invalid': errors.hasErrorNo }" required/>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNo">{{ $t('The password is not formatted correctly') }}</small>
 
                 </div>
@@ -76,7 +76,7 @@
                 <div class="col-md-9 pe-5">
 
                   <textarea class="form-control" rows="3" :placeholder="$t('Name')" v-model="form.name" @change="checkInputNm()"
-                    v-bind:class="{ 'is-invalid': errors.hasErrorNm }"></textarea>
+                    v-bind:class="{ 'is-invalid': errors.hasErrorNm }" required></textarea>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNm">{{ $t('The name is not formatted correctly') }}</small>
 
                 </div>
@@ -237,7 +237,7 @@ export default {
         return
       }
 
-      if (typeCount == 3 && (lengPw <= 8 || lengPw >= 20)) {
+      if (typeCount == 3 && (lengPw < 8 || lengPw > 20)) {
         this.errors.hasErrorNo = true
 
         console.log("password must be between 8 and 20")
@@ -248,9 +248,10 @@ export default {
       let ListNmInPw = this.form.password.match(/\d+/g); // list the digits contained in password
 
       let runIntoList = 0
+      let consecutiveNm = ['012','123','234','345','456','567','678','789','890',]
       if (ListNmInPw != null) {
         ListNmInPw.forEach(element => {
-          if (element.length > 3) {
+          if (element.length > 3 || consecutiveNm.some(subStr => element.includes(subStr))) {
 
             this.errors.hasErrorNo = true
             runIntoList = 1
