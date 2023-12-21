@@ -1,11 +1,11 @@
 <template>
   <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">{{$t('List Member')}}</h1>
+      <h1 class="h3 mb-0 text-gray-800">{{ $t('List Member') }}</h1>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="./">{{ $t('Home') }}</a></li>
         <li class="breadcrumb-item">{{ $t('Member') }}</li>
-        <li class="breadcrumb-item active" aria-current="page">{{$t('List Member')}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $t('List Member') }}</li>
       </ol>
     </div>
 
@@ -104,16 +104,18 @@
               <div class="col-lg-3 mb-4">
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group">
-                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 ">{{ $t('Inquiry') }}</button>
+                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 " @click="searchForm.page = 0">{{ $t('Inquiry')
+                    }}</button>
                   </div>
                   <div class="btn-group ">
 
                     <!-- <download-excel class="btn btn-default" :data="members" :fields="json_fields"
                      worksheet="My Worksheet" name="filename.xlsx"> -->
-                      <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">{{ $t('Excel') }}</button>
+                    <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">{{ $t('Excel')
+                    }}</button>
                     <!-- </download-excel> -->
 
-                   
+
                   </div>
                 </div>
               </div>
@@ -145,6 +147,7 @@
                     <th>{{ $t('Mobile phone number') }}</th>
                     <th>{{ $t('email') }}</th>
                     <th>{{ $t('Join date') }}</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -155,6 +158,12 @@
                     <td>{{ member.mobilePhone }}</td>
                     <td>{{ member.email }}</td>
                     <td>{{ member.joinDate.slice(0, 10) }}</td>
+                    <td>
+                      <!-- <router-link class="btn btn-sm btn-primary">Edit</router-link> -->
+
+                      <a @click="deleteEmployee(member.memberNo)" class="btn btn-sm btn-danger">
+                        <font color="#ffffff">Delete</font></a>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -219,14 +228,14 @@ export default {
         'Join Date': 'joinDate'
       },
 
-      json_data: [        {
-            "memberNo": 10,
-            "id": "11334",
-            "name": "phanvanhung",
-            "mobilePhone": "044484894",
-            "email": "pvhung@nate.com",
-            "joinDate": "2023-12-16T19:35:01.958+00:00"
-        }],
+      json_data: [{
+        "memberNo": 10,
+        "id": "11334",
+        "name": "phanvanhung",
+        "mobilePhone": "044484894",
+        "email": "pvhung@nate.com",
+        "joinDate": "2023-12-16T19:35:01.958+00:00"
+      }],
       json_meta: [
         [
           {
@@ -247,8 +256,8 @@ export default {
       deep: true
     },
 
-    members:{
-      addJsonData(){
+    members: {
+      addJsonData() {
         this.json_data = this.members
       },
       deep: true
@@ -292,7 +301,7 @@ export default {
           console.log("this is error of listMember" + error)
 
           //Temporary fix, needs further improvement
-          if(error.response.status == 403){
+          if (error.response.status == 403) {
             this.$router.go(0)
           }
         })
@@ -302,19 +311,26 @@ export default {
       this.search()
 
     },
-    exportExcel(){
-       axios.post('http://localhost:8080/api/v1/member/exportExcel', this.searchForm, {
+    exportExcel() {
+      axios.post('http://localhost:8080/api/v1/member/exportExcel', this.searchForm, {
         responseType: 'blob'
-       })
-      .then(response => {
-        console.log(response);
-        const label = 'ListMember.xlsx';
-         const blob = new Blob([response.data], { type: response.headers['content-type'] })
-        const link = document.createElement('a')
-        link.href = URL.createObjectURL(blob)
-        link.download = label
-        link.click()
-        URL.revokeObjectURL(link.href) 
+      })
+        .then(response => {
+          console.log(response);
+          const label = 'ListMember.xlsx';
+          const blob = new Blob([response.data], { type: response.headers['content-type'] })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = label
+          link.click()
+          URL.revokeObjectURL(link.href)
+        })
+        .catch(console.error())
+    },
+    deleteEmployee(id){
+      axios.put('http://localhost:8080/api/v1/member/delete/' + id)
+      .then(() => {
+        this.$router.go(0)
       })
       .catch(console.error())
     }

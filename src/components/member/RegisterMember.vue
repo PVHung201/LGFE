@@ -190,7 +190,7 @@ export default {
       this.form.email = this.email1 + '@' + this.email2;
       axios.post('http://localhost:8080/api/v1/member/register', this.form)
         .then(() => {
-          this.$router.push({ name: 'home' })
+          this.$router.push({ name: 'login' })
         })
         .catch((error) => {
           console.log(error),
