@@ -18,7 +18,6 @@ const jwtInterceptor = () => {
               // }
               );
         } 
-        console.log('testtttttt github')
 }
 
 export default jwtInterceptor;

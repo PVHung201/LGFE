@@ -1,13 +1,18 @@
 <template>
+
   <form class="vh-100" @submit.prevent="memberInsert">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-9">
-
           <div class="card" style="border-radius: 15px;">
             <div class="card-body">
 
-              <div class="row align-items-center pt-4 pb-3">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">{{ $t('Register') }}</h1>
+                
+              </div>
+
+              <div class="row align-items-center pt-4 pb-3">        
                 <div class="col-md-3 ps-5">
 
                   <h6 class="mb-0">ID</h6>
@@ -194,7 +199,7 @@ export default {
     },
 
     checkInputId() {
-      if (!(/^\d+$/.test(this.form.id)) || this.form.id.length < 5) {
+      if (!(/^\d+$/.test(this.form.id)) || this.form.id.length < 4) {
         this.errors.hasErrorId = true
         return
       }
@@ -226,7 +231,7 @@ export default {
       // Password Oke
       const typeCount = [onlyLetter, onlyNm, onlySpecialChar].filter(Boolean).length;
 
-      if (typeCount == 2 && (lengPw <= 10 || lengPw >= 20)) {
+      if (typeCount == 2 && (lengPw < 10 || lengPw > 20)) {
         this.errors.hasErrorNo = true
         console.log("password must be between 10 and 20")
         return

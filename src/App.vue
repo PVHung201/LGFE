@@ -9,7 +9,7 @@
     <button class="btn btn-light" @click="swichLanguage('EN')">
       <img src="../public/assets121/img/english.png" width="16" height="11" loading="lazy">
       <span class="mg-left-lv2-i">
-        English </span>
+        EN </span>
     </button>
   </div>
 

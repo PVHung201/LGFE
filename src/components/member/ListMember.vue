@@ -288,7 +288,14 @@ export default {
       axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
         .then(({ data }) => (this.members = data.listMemberRen,
           this.count = data.count))
-        .catch(console.error());
+        .catch((error) => {
+          console.log("this is error of listMember" + error)
+
+          //Temporary fix, needs further improvement
+          if(error.response.status == 403){
+            this.$router.go(0)
+          }
+        })
     },
     changePage(n) {
       this.searchForm.page = n
