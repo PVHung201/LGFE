@@ -1,9 +1,6 @@
 <template>
    <nav v-show ="$route.path === '/registerMem' || $route.path === '/login' ? false : true"  
    id ="topbar" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top" style="display: none;">
-          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown no-arrow">
 

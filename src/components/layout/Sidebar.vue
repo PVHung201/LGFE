@@ -34,6 +34,23 @@
           <i class="far fa-solid fa-id-card"></i> <span>{{ $t('Register') }}</span>
         </a>
       </router-link>
+
+      <hr class="sidebar-divider" />
+
+      <router-link to="/list" class="nav-item">
+        <a class="nav-link">
+          <i class="far fas fa-list"></i> <span>{{ $t('List Member') }}</span>
+        </a>
+      </router-link>
+      
+      <hr class="sidebar-divider" />
+
+      <router-link to="/exmember" class="nav-item">
+        <a class="nav-link">
+          <i class="fab fa-creative-commons-sa"></i> <span>{{ $t('ExMember') }}</span>
+        </a>
+      </router-link>
+
     </ul>
   </nav>
 </template>

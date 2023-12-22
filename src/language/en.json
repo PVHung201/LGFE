@@ -58,6 +58,12 @@
     "Signed out successfully": "Signed out successfully",
     "Total of member": "Total of member:",
     "Previous": "Previous",
-    "Next": "Next"
+    "Next": "Next",
+    "ExMember": "ExMember",
+    "Action": "Action",
+    "Delete": "Delete",
+    "Rejoin": "Rejoin",
+    "List Ex-Member": "List Ex-Member"
+
 
 }

@@ -56,7 +56,10 @@
     "Signed out successfully": "성공적으로 로그아웃되었습니다",
     "Total of member": "총 회원수:",
     "Previous": "이전의",
-    "Next": "다음"
-
-
+    "Next": "다음",
+    "ExMember": "기존 회원",
+    "Action": "행동",
+    "Delete": "삭제",
+    "Rejoin": "재가입",
+    "List Ex-Member": "꾸탄비엔"
 }

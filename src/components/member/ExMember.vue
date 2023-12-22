@@ -147,7 +147,7 @@
                       <th>{{ $t('Mobile phone number') }}</th>
                       <th>{{ $t('email') }}</th>
                       <th>{{ $t('Join date') }}</th>
-                      <th>Action</th>
+                      <th>{{ $t('Action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -160,9 +160,9 @@
                       <td>{{ member.joinDate.slice(0, 10) }}</td>
                       <td>
                         <!-- <router-link class="btn btn-sm btn-primary">Edit</router-link> -->
-  
-                        <a @click="deleteEmployee(member.memberNo)" class="btn btn-sm btn-danger">
-                          <font color="#ffffff">Delete</font></a>
+
+                          <button @click="reJoin(member.memberNo)" type="button" class="btn btn-info mb-1">{{ $t('Rejoin') }}</button>
+
                       </td>
                     </tr>
                   </tbody>
@@ -293,7 +293,7 @@
         this.hasErrors.hasErrorNm = false;
       },
       search() {
-        axios.post('http://localhost:8080/api/v1/member/list/search', this.searchForm)
+        axios.post('http://localhost:8080/api/v1/member/list/leavedMem', this.searchForm)
           .then(({ data }) => (this.members = data.listMemberRen,
             this.count = data.count))
           .catch((error) => {
@@ -326,12 +326,18 @@
           })
           .catch(console.error())
       },
-      deleteEmployee(id){
-        axios.put('http://localhost:8080/api/v1/member/delete/' + id)
+      reJoin(id){
+
+        var result = confirm("Are you sure you want to reinstate this employee?");
+
+        if(result){
+            axios.put('http://localhost:8080/api/v1/member/comeBack/' + id)
         .then(() => {
           this.$router.go(0)
         })
         .catch(console.error())
+        }
+
       }
     }
   }

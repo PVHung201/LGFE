@@ -8,14 +8,14 @@
       <div class="dataTables_paginate paging_simple_numbers" id="dataTableHover_paginate">
         <ul class="pagination" id="paginate">
 
-              <li class="page-item"><a class="page-link" href="#">{{ $t('Previous') }}</a></li>
+              <!-- <li class="page-item"><a class="page-link" href="#">{{ $t('Previous') }}</a></li> -->
               <li v-for="n in NumberOfPage " :key="n" class="page-item">
 
                 <a class="page-link" href="#" @click="$emit('changePage', n-1)">{{ n }}</a>
               </li>
 
 
-              <li class="page-item"><a class="page-link" href="#">{{ $t('Next') }}</a></li>
+              <!-- <li class="page-item"><a class="page-link" href="#">{{ $t('Next') }}</a></li> -->
 
         </ul>
       </div>

@@ -5,6 +5,7 @@ import RegisterMember from '../components/member/RegisterMember.vue'
 import LoginPage from '../components/member/LoginPage.vue'
 import paginatePage from '../components/member/paginatePage.vue'
 import logOut from '../components/member/logOut.vue'
+import ExMember from '../components/member/ExMember.vue'
 
 
 const routes = [
@@ -48,7 +49,13 @@ const routes = [
     path: '/logout',
     name: 'logOut',
     component: logOut
-  }
+  },
+  {
+    path: '/exmember',
+    name: 'ExMember',
+    component: ExMember
+  },
+
   
 ]
 

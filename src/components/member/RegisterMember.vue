@@ -1,5 +1,4 @@
 <template>
-
   <form class="vh-100" @submit.prevent="memberInsert">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -9,10 +8,10 @@
 
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">{{ $t('Register') }}</h1>
-                
+
               </div>
 
-              <div class="row align-items-center pt-4 pb-3">        
+              <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-3 ps-5">
 
                   <h6 class="mb-0">ID</h6>
@@ -20,8 +19,10 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId" required />
-                  <small class="text-danger col-md-9" v-if="errors.hasErrorId">{{ $t('The id is not formatted correctly') }}</small>
+                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId"
+                    required />
+                  <small class="text-danger col-md-9" v-if="errors.hasErrorId">{{ $t('The id is not formatted correctly')
+                  }}</small>
 
 
                 </div>
@@ -37,9 +38,15 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type="password" class="form-control form-control-lg" :placeholder="$t('Password')"
+                  <input :type="passwordType" id="password" class="form-control form-control-lg" :placeholder="$t('Password')"
                     v-model="form.password" @change="checkInputPw()" @input="validatePassword"
-                    v-bind:class="{ 'is-invalid': errors.hasErrorNo }" required/>
+                    v-bind:class="{ 'is-invalid': errors.hasErrorNo }" required>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" @click="disPlayPw">
+                    <label class="form-check-label">
+                      Show password
+                    </label>
+                  </div>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNo">{{ $t('The password is not formatted correctly') }}</small>
 
                 </div>
@@ -58,7 +65,8 @@
 
                   <input type="password" class="form-control form-control-lg" :placeholder="$t('confirm your password')"
                     @input="validatePassword" v-model="confirmPassword" />
-                  <small class="text-danger col-md-9" v-if="errors.passwordMismatch">{{ $t('The password must be same') }}</small>
+                  <small class="text-danger col-md-9" v-if="errors.passwordMismatch">{{ $t('The password must be same')
+                  }}</small>
 
 
                 </div>
@@ -75,8 +83,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <textarea class="form-control" rows="3" :placeholder="$t('Name')" v-model="form.name" @change="checkInputNm()"
-                    v-bind:class="{ 'is-invalid': errors.hasErrorNm }" required></textarea>
+                  <input type="text" class="form-control" rows="3" :placeholder="$t('Name')" v-model="form.name"
+                    @change="checkInputNm()" v-bind:class="{ 'is-invalid': errors.hasErrorNm }" required />
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNm">{{ $t('The name is not formatted correctly') }}</small>
 
                 </div>
@@ -92,8 +100,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
 
-                  <input type = "number" class="form-control" rows="3" :placeholder="$t('type your mobiphone')" v-model="form.mobilePhone"
-                    @change="checkInputPh()" v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"/>
+                  <input type="number" class="form-control" rows="3" :placeholder="$t('type your mobiphone')"
+                    v-model="form.mobilePhone" @change="checkInputPh()"
+                    v-bind:class="{ 'is-invalid': errors.hasErrorPhone }" />
                   <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">{{ $t('The name is not formatted correctly') }}</small>
 
 
@@ -108,11 +117,13 @@
                 </div>
                 <div class="col-md-3 pe-5">
 
-                  <textarea class="form-control" rows="3" :placeholder="$t('type you domain email')" v-model="email1" @input="validateBoxes"></textarea>
+                  <input type="text" class="form-control" rows="3" :placeholder="$t('type you domain email')"
+                    v-model="email1" @input="validateBoxes" />
 
                 </div>
                 <label for="inputState" class="col-md-1 ps-5">@ </label>
-                <select id="inputState" class="form-control col-md-3 ps-5" rows="3" v-model="email2" @change="validateBoxes">
+                <select id="inputState" class="form-control col-md-3 ps-5" rows="3" v-model="email2"
+                  @change="validateBoxes">
                   <option value="vaner.com">vaner.com</option>
                   <option value="daum.net">daum.net</option>
                   <option value="gmail.com">gmail.com</option>
@@ -128,7 +139,7 @@
               <div class="px-5 py-4">
                 <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">{{ $t('Register') }}</button>
               </div>
-              <small class="text-danger col-md-9" v-if="errorAfterRegis">{{errorAfterRegis}}</small>
+              <small class="text-danger col-md-9" v-if="errorAfterRegis">{{ errorAfterRegis }}</small>
 
             </div>
           </div>
@@ -140,8 +151,7 @@
     
     
 <script>
- import axios from "axios"
-
+import axios from "axios"
 
 
 export default {
@@ -160,6 +170,7 @@ export default {
 
       email1: null,
       email2: null,
+      passwordType: "password",
 
       confirmPassword: null,
       errors: {
@@ -192,7 +203,7 @@ export default {
   methods: {
     memberInsert() {
 
-      if(this.email2 == null){
+      if (this.email2 == null) {
         this.form.email
       } else {
         this.form.email = this.email1 + '@' + this.email2
@@ -203,7 +214,7 @@ export default {
         })
         .catch((error) => {
           console.log(error),
-          this.errorAfterRegis = error.response.data.error
+            this.errorAfterRegis = error.response.data.error
         });
     },
 
@@ -257,7 +268,7 @@ export default {
       let ListNmInPw = this.form.password.match(/\d+/g); // list the digits contained in password
 
       let runIntoList = 0
-      let consecutiveNm = ['012','123','234','345','456','567','678','789','890',]
+      let consecutiveNm = ['012', '123', '234', '345', '456', '567', '678', '789', '890',]
       if (ListNmInPw != null) {
         ListNmInPw.forEach(element => {
           if (element.length > 3 || consecutiveNm.some(subStr => element.includes(subStr))) {
@@ -288,14 +299,18 @@ export default {
     },
 
     validateBoxes() {
-      if((this.email1 == null || this.email1 == '') && this.email2 == null ){
+      if ((this.email1 == null || this.email1 == '') && this.email2 == null) {
         this.errors.validateEmail = false
         this.form.email = null
         return
       } else {
-        this.errors.validateEmail = ((this.email1 == null || this.email1 == '') && this.email2 !== null) || (this.email1 !== null && this.email2 == null) ;
+        this.errors.validateEmail = ((this.email1 == null || this.email1 == '') && this.email2 !== null) || (this.email1 !== null && this.email2 == null);
       }
     },
+
+    disPlayPw(){
+     this.passwordType = this.passwordType === "password" ? "text" : "password";     
+    }
 
 
   }

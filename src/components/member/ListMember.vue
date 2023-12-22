@@ -64,7 +64,7 @@
                       <input type="text" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                         :placeholder="$t('Enter name')" v-model="searchForm.name" @change="checkInputNm"
                         v-bind:class="{ 'is-invalid': hasErrors.hasErrorNm }">
-                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorNm">{{ $t('The name is not formatted orrectly') }}</small>
+                      <small class="text-danger col-md-9" v-if="hasErrors.hasErrorNm">{{ $t('The name is not formatted correctly') }}</small>
 
                     </div>
                   </div>
@@ -104,8 +104,9 @@
               <div class="col-lg-3 mb-4">
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group">
-                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 " @click="searchForm.page = 0">{{ $t('Inquiry')
-                    }}</button>
+                    <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg mr-3 "
+                      @click="searchForm.page = 0">{{ $t('Inquiry')
+                      }}</button>
                   </div>
                   <div class="btn-group ">
 
@@ -147,7 +148,7 @@
                     <th>{{ $t('Mobile phone number') }}</th>
                     <th>{{ $t('email') }}</th>
                     <th>{{ $t('Join date') }}</th>
-                    <th>Action</th>
+                    <th>{{ $t('Action') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -162,8 +163,10 @@
                       <!-- <router-link class="btn btn-sm btn-primary">Edit</router-link> -->
 
                       <a @click="deleteEmployee(member.memberNo)" class="btn btn-sm btn-danger">
-                        <font color="#ffffff">Delete</font></a>
+                        <font color="#ffffff">{{ $t('Delete') }}</font>
+                      </a>
                     </td>
+
                   </tr>
                 </tbody>
               </table>
@@ -326,13 +329,23 @@ export default {
         })
         .catch(console.error())
     },
-    deleteEmployee(id){
-      axios.put('http://localhost:8080/api/v1/member/delete/' + id)
-      .then(() => {
-        this.$router.go(0)
-      })
-      .catch(console.error())
+    deleteEmployee(id) {
+
+      var result = confirm("Are you sure you want to delete? Please think again!");
+
+      if (result) {
+        axios.put('http://localhost:8080/api/v1/member/delete/' + id)
+          .then(() => {
+            this.$router.go(0)
+          })
+          .catch(console.error())
+      }
+
+
+
     }
+
+
   }
 }
 </script>
