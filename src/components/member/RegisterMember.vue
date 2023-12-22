@@ -108,18 +108,20 @@
                 </div>
                 <div class="col-md-3 pe-5">
 
-                  <textarea class="form-control" rows="3" :placeholder="$t('type you domain email')" v-model="email1"></textarea>
+                  <textarea class="form-control" rows="3" :placeholder="$t('type you domain email')" v-model="email1" @input="validateBoxes"></textarea>
 
                 </div>
                 <label for="inputState" class="col-md-1 ps-5">@ </label>
-                <select id="inputState" class="form-control col-md-3 ps-5" rows="3" v-model="email2">
-                  <option selected>vaner.com</option>
-                  <option>daum.net</option>
-                  <option>gmail.com</option>
-                  <option>nate.com</option>
-                  <option>Hotmail.com</option>
+                <select id="inputState" class="form-control col-md-3 ps-5" rows="3" v-model="email2" @change="validateBoxes">
+                  <option value="vaner.com">vaner.com</option>
+                  <option value="daum.net">daum.net</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <option value="nate.com">nate.com</option>
+                  <option value="Hotmail.com">Hotmail.com</option>
                 </select>
               </div>
+
+              <small class="text-danger col-md-9" v-if="errors.validateEmail">{{ $t('The email is not formatted correctly') }}</small>
 
               <hr class="mx-n3">
 
@@ -158,13 +160,16 @@ export default {
 
       email1: null,
       email2: null,
+
       confirmPassword: null,
       errors: {
         hasErrorId: false,
         hasErrorNo: false,
         hasErrorNm: false,
         hasErrorPhone: false,
-        passwordMismatch: false
+        passwordMismatch: false,
+        validateEmail: false
+
       },
       errorAfterRegis: '',
       isvalid: true
@@ -177,7 +182,7 @@ export default {
   watch: {
     errors: {
       handler() {
-        this.isvalid = this.errors.hasErrorId || this.errors.hasErrorNo || this.errors.hasErrorNm || this.errors.hasErrorPhone || this.errors.passwordMismatch
+        this.isvalid = this.errors.hasErrorId || this.errors.hasErrorNo || this.errors.hasErrorNm || this.errors.hasErrorPhone || this.errors.passwordMismatch || this.errors.validateEmail
       },
       deep: true
     },
@@ -187,7 +192,11 @@ export default {
   methods: {
     memberInsert() {
 
-      this.form.email = this.email1 + '@' + this.email2;
+      if(this.email2 == null){
+        this.form.email
+      } else {
+        this.form.email = this.email1 + '@' + this.email2
+      }
       axios.post('http://localhost:8080/api/v1/member/register', this.form)
         .then(() => {
           this.$router.push({ name: 'login' })
@@ -276,7 +285,17 @@ export default {
     },
     validatePassword() {
       this.errors.passwordMismatch = this.form.password !== this.confirmPassword;
-    }
+    },
+
+    validateBoxes() {
+      if((this.email1 == null || this.email1 == '') && this.email2 == null ){
+        this.errors.validateEmail = false
+        this.form.email = null
+        return
+      } else {
+        this.errors.validateEmail = ((this.email1 == null || this.email1 == '') && this.email2 !== null) || (this.email1 !== null && this.email2 == null) ;
+      }
+    },
 
 
   }

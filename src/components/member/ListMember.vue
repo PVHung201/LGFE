@@ -44,7 +44,7 @@
                     <div class="col-3 text-center">{{ $t('Mobile phone number') }}</div>
                     <div class="col">
                       <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        :placeholder="$t('Enter phone number')" v-model="searchForm.mobilePhone" required>
+                        :placeholder="$t('Enter phone number')" v-model="searchForm.mobilePhone">
                     </div>
                   </div>
                 </div>
@@ -191,7 +191,7 @@
 
 <script>
 import axios from "axios"
-// import User from '../../helpers/User'
+import User from '../../helpers/User'
 import PaginatePage from "./paginatePage.vue"
 
 
@@ -263,17 +263,17 @@ export default {
     }
   },
 
-  // created() {
-  //   if (!User.loggedIn()) {
-  //     this.$router.push({ name: 'login' });
-  //     return;
-  //   }
-  //   let currentDate = new Date();
-  //   this.searchForm.endDate = currentDate.toISOString().split('T')[0];
-  //   currentDate.setFullYear(currentDate.getFullYear() - 1);
-  //   this.searchForm.beginDate = currentDate.toISOString().split('T')[0];
-  //   this.search()
-  // },
+  created() {
+    if (!User.loggedIn()) {
+      this.$router.push({ name: 'login' });
+      return;
+    }
+    let currentDate = new Date();
+    this.searchForm.endDate = currentDate.toISOString().split('T')[0];
+    currentDate.setFullYear(currentDate.getFullYear() - 1);
+    this.searchForm.beginDate = currentDate.toISOString().split('T')[0];
+    this.search()
+  },
   methods: {
 
     checkInputId() {
