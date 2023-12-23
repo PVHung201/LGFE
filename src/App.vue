@@ -16,7 +16,7 @@
 
 
 
-    <div id="wrapper">
+    <div id="wrapper" style = "min-height: 90%;">
       <!-- Sidebar -->
       <SideBar />
       <!-- Sidebar -->
@@ -32,9 +32,11 @@
           </div>
         </div>
         <!--Footer-->
-        <FooterCom />
+        <FooterCom v-show ="$route.path === '/registerMem' || $route.path === '/login' ? false : true" />
       </div>
     </div>
+    <FooterCom v-show ="$route.path === '/registerMem' || $route.path === '/login' ? true : false" />
+
 </template>
 <script>
 

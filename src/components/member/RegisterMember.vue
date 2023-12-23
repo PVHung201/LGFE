@@ -6,8 +6,9 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body">
 
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">{{ $t('Register') }}</h1>
+              <div>
+                <a href="/login" class="fas fa-chevron-left"></a>
+                <h1 class="h4 text-gray-900 mb-4 text-center align-center">{{ $t('Register') }}</h1>
 
               </div>
 
@@ -44,7 +45,7 @@
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" @click="disPlayPw">
                     <label class="form-check-label">
-                      Show password
+                      {{ $t('Show password') }}
                     </label>
                   </div>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNo">{{ $t('The password is not formatted correctly') }}</small>

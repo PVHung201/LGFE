@@ -49,7 +49,7 @@
     "Contract extension": "계약 연장",
     "View All Taks": "모든 작업 보기",
     "Profile": "프로필",
-    "Settings": "Settings",
+    "Settings": "설정",
     "Activity Log": "설정",
     "Logout": "로그 아웃",
     "Dashboard": "계기반",
@@ -61,5 +61,6 @@
     "Action": "행동",
     "Delete": "삭제",
     "Rejoin": "재가입",
-    "List Ex-Member": "꾸탄비엔"
+    "List Ex-Member": "꾸탄비엔",
+    "Show password": "비밀번호 표시"
 }

@@ -311,7 +311,7 @@
   
       },
       exportExcel() {
-        axios.post('http://localhost:8080/api/v1/member/exportExcel', this.searchForm, {
+        axios.post('http://localhost:8080/api/v1/member/exportExcelExMem', this.searchForm, {
           responseType: 'blob'
         })
           .then(response => {

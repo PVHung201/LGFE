@@ -63,7 +63,8 @@
     "Action": "Action",
     "Delete": "Delete",
     "Rejoin": "Rejoin",
-    "List Ex-Member": "List Ex-Member"
+    "List Ex-Member": "List Ex-Member",
+    "Show password": "Show password"
 
 
 }
