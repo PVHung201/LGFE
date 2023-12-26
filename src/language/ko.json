@@ -62,5 +62,12 @@
     "Delete": "삭제",
     "Rejoin": "재가입",
     "List Ex-Member": "꾸탄비엔",
-    "Show password": "비밀번호 표시"
+    "Show password": "비밀번호 표시",
+    "404 Page Not Found": "404 페이지를 찾을 수 없습니다",
+    "← Back to List Member": "← 목록으로 돌아가기 회원",
+    "Add Member": "회원 추가",
+    "Are you sure you want to delete? Please think again!": "정말 삭제하시겠습니까? 다시 생각해 보세요!",
+    "Are you sure you want to reinstate this employee?": "이 직원을 복직하시겠습니까?",
+    "English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.": "영문 대소문자/특수문자/숫자, 2조합(10~20자), 3조합(8~20자), 일련번호는 허용되지 않습니다.",
+    "Special characters are !@# Only $%^&* can be entered": "특수문자는 !@# $%^&*만 입력 가능"
 }

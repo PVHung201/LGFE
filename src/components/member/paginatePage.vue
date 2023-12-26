@@ -38,9 +38,6 @@ export default {
 
   props: ['page'],
 
-  setup(props) {
-    console.log(props.page)
-  },
   watch: {
   page(){
     this.NumberOfPage = this.page % 5 == 0 ? this.page / 5 : Math.floor(this.page / 5) + 1

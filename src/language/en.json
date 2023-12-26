@@ -64,7 +64,13 @@
     "Delete": "Delete",
     "Rejoin": "Rejoin",
     "List Ex-Member": "List Ex-Member",
-    "Show password": "Show password"
-
+    "Show password": "Show password",
+    "404 Page Not Found": "404 Page Not Found",
+    "← Back to List Member": "← Back to List Member",
+    "Add Member": "Add Member",
+    "Are you sure you want to delete? Please think again!": "Are you sure you want to delete? Please think again!",
+    "Are you sure you want to reinstate this employee?": "Are you sure you want to reinstate this employee?",
+    "English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.": "English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.",
+    "Special characters are !@# Only $%^&* can be entered": "Special characters are !@# Only $%^&* can be entered"
 
 }

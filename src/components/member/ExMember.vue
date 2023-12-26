@@ -3,8 +3,7 @@
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ $t('List Ex-Member') }}</h1>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="./">{{ $t('Home') }}</a></li>
-          <li class="breadcrumb-item">{{ $t('Member') }}</li>
+          <li class="breadcrumb-item">{{ $t('Home') }}</li>
           <li class="breadcrumb-item active" aria-current="page">{{ $t('List Ex-Member') }}</li>
         </ol>
       </div>
@@ -23,7 +22,7 @@
                     <div class="d-flex align-items-center">
                       <div class="col-3 text-center">ID</div>
                       <div class="col">
-                        <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                           :placeholder="$t('Enter Id')" v-model="searchForm.id" @change="checkInputId"
                           v-bind:class="{ 'is-invalid': hasErrors.hasErrorId }">
                         <small class="text-danger col-md-9" v-if="hasErrors.hasErrorId">{{ $t('The Id is not formatted correctly') }}</small>
@@ -43,7 +42,7 @@
                     <div class="d-flex align-items-center">
                       <div class="col-3 text-center">{{ $t('Mobile phone number') }}</div>
                       <div class="col">
-                        <input type="number" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
                           :placeholder="$t('Enter phone number')" v-model="searchForm.mobilePhone" required>
                       </div>
                     </div>
@@ -108,27 +107,15 @@
                       }}</button>
                     </div>
                     <div class="btn-group ">
-  
-                      <!-- <download-excel class="btn btn-default" :data="members" :fields="json_fields"
-                       worksheet="My Worksheet" name="filename.xlsx"> -->
                       <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">{{ $t('Excel')
-                      }}</button>
-                      <!-- </download-excel> -->
-  
-  
+                      }}</button>  
                     </div>
                   </div>
                 </div>
               </div>
               <!--End Row 3-->
-  
-  
               <div>
-  
-  
               </div>
-  
-  
               <!-- End Right box-->
   
             </form>
@@ -190,9 +177,9 @@
   </template>
   
   <script>
-  import axios from "axios"
+  import axios from '../../service/axiosService'
   import User from '../../helpers/User'
-  import PaginatePage from "./paginatePage.vue"
+  import PaginatePage from "./PaginatePage.vue"
   
   
   
@@ -210,7 +197,8 @@
           beginDate: null,
           endDate: null,
           size: 5,
-          page: 0
+          page: 0,
+          status: 1
         },
         hasErrors: {
           hasErrorId: false,
@@ -293,7 +281,7 @@
         this.hasErrors.hasErrorNm = false;
       },
       search() {
-        axios.post('http://localhost:8080/api/v1/member/list/leavedMem', this.searchForm)
+        axios.post('/member/search', this.searchForm)
           .then(({ data }) => (this.members = data.listMemberRen,
             this.count = data.count))
           .catch((error) => {
@@ -311,11 +299,10 @@
   
       },
       exportExcel() {
-        axios.post('http://localhost:8080/api/v1/member/exportExcelExMem', this.searchForm, {
+        axios.post('/member/exportExcel', this.searchForm, {
           responseType: 'blob'
         })
           .then(response => {
-            console.log(response);
             const label = 'ListMember.xlsx';
             const blob = new Blob([response.data], { type: response.headers['content-type'] })
             const link = document.createElement('a')
@@ -328,8 +315,7 @@
       },
       reJoin(id){
 
-        var result = confirm("Are you sure you want to reinstate this employee?");
-
+        var result = confirm(this.$t("Are you sure you want to reinstate this employee?"));
         if(result){
             axios.put('http://localhost:8080/api/v1/member/comeBack/' + id)
         .then(() => {

@@ -11,7 +11,7 @@
                   </div>
       <form class="user" @submit.prevent="login">
         <div class="form-group">
-          <input type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+          <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
           :placeholder="$t('Enter Id Employee')" v-model="form.id">
     <small class="text-danger" v-if="errors.id"> {{ errors.id[0] }} </small>        
         </div>
@@ -30,16 +30,8 @@
           <small class="text-danger col-md-9" v-if="errorAfterLog">{{errorAfterLog}}</small>
 
         </div>
-        <hr>
         
       </form>
-                  <hr>
-                  <div class="text-center">
- <router-link to="/registerMem" class="font-weight-bold small">{{$t('Create an account')}}</router-link>
-                  </div>
-                  <div class="text-center">
-    <router-link to="/#" class="font-weight-bold small">{{$t('Forget Password')}}</router-link>
-                  </div>
                 </div>
               </div>
             </div>
@@ -54,7 +46,7 @@
 
 <script type="text/javascript">
 	
-import axios from 'axios'
+import axios from '../../service/axiosService'
 import User from '../../helpers/User'
 
   export default {
@@ -77,7 +69,7 @@ import User from '../../helpers/User'
   }, 
   methods:{
     login(){
-      axios.post('http://localhost:8080/api/v1/auth/login',this.form, {
+      axios.post('/auth/login',this.form, {
         headers:{
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -88,7 +80,6 @@ import User from '../../helpers/User'
       })
 
       .catch((error) => {
-          console.log(error)
           this.errorAfterLog = error.response.data.error
         });
 

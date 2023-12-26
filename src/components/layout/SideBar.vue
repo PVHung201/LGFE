@@ -26,15 +26,6 @@
           <span>{{ $t('Dashboard') }}</span></router-link
         >
       </li>
-
-      <hr class="sidebar-divider" />
-
-      <router-link to="/registerMem" class="nav-item">
-        <a class="nav-link">
-          <i class="far fa-solid fa-id-card"></i> <span>{{ $t('Register') }}</span>
-        </a>
-      </router-link>
-
       <hr class="sidebar-divider" />
 
       <router-link to="/list" class="nav-item">

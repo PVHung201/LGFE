@@ -9,23 +9,16 @@
               <div>
                 <a href="/login" class="fas fa-chevron-left"></a>
                 <h1 class="h4 text-gray-900 mb-4 text-center align-center">{{ $t('Register') }}</h1>
-
               </div>
-
               <div class="row align-items-center pt-4 pb-3">
                 <div class="col-md-3 ps-5">
-
                   <h6 class="mb-0">ID</h6>
-
                 </div>
                 <div class="col-md-9 pe-5">
-
-                  <input type="text" class="form-control form-control-lg" v-model="form.id" @change="checkInputId"
+                  <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control form-control-lg" v-model="form.id" @change="checkInputId"
                     required />
                   <small class="text-danger col-md-9" v-if="errors.hasErrorId">{{ $t('The id is not formatted correctly')
                   }}</small>
-
-
                 </div>
               </div>
 
@@ -33,12 +26,9 @@
 
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-
                   <h6 class="mb-0">{{ $t('Password') }}</h6>
-
                 </div>
                 <div class="col-md-9 pe-5">
-
                   <input :type="passwordType" id="password" class="form-control form-control-lg" :placeholder="$t('Password')"
                     v-model="form.password" @change="checkInputPw()" @input="validatePassword"
                     v-bind:class="{ 'is-invalid': errors.hasErrorNo }" required>
@@ -49,31 +39,20 @@
                     </label>
                   </div>
                   <small class="text-danger col-md-9" v-if="errors.hasErrorNo">{{ $t('The password is not formatted correctly') }}</small>
-
                 </div>
-
               </div>
-
-
 
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-
                   <h6 class="mb-0">{{ $t('Reconfirm your password') }}</h6>
-
                 </div>
                 <div class="col-md-9 pe-5">
-
                   <input type="password" class="form-control form-control-lg" :placeholder="$t('confirm your password')"
                     @input="validatePassword" v-model="confirmPassword" />
                   <small class="text-danger col-md-9" v-if="errors.passwordMismatch">{{ $t('The password must be same')
                   }}</small>
-
-
                 </div>
               </div>
-
-
               <hr class="mx-n3">
 
               <div class="row align-items-center py-3">
@@ -95,53 +74,49 @@
 
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-
                   <h6 class="mb-0">{{ $t('Mobile phone number') }}</h6>
-
                 </div>
                 <div class="col-md-9 pe-5">
-
-                  <input type="number" class="form-control" rows="3" :placeholder="$t('type your mobiphone')"
+                  <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" class="form-control" rows="3" :placeholder="$t('type your mobiphone')"
                     v-model="form.mobilePhone" @change="checkInputPh()"
                     v-bind:class="{ 'is-invalid': errors.hasErrorPhone }" />
                   <small class="text-danger col-md-9" v-if="errors.hasErrorPhone">{{ $t('The name is not formatted correctly') }}</small>
-
-
+                  <small> * {{ $t('English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.') }} </small>
+                  <br>
+                  <small> * {{ $t('Special characters are !@# Only $%^&* can be entered') }}</small>
                 </div>
               </div>
 
               <div class="row align-items-center py-3">
                 <div class="col-md-3 ps-5">
-
                   <h6 class="mb-0">{{ $t('email') }}</h6>
-
                 </div>
                 <div class="col-md-3 pe-5">
-
                   <input type="text" class="form-control" rows="3" :placeholder="$t('type you domain email')"
                     v-model="email1" @input="validateBoxes" />
-
                 </div>
-                <label for="inputState" class="col-md-1 ps-5">@ </label>
-                <select id="inputState" class="form-control col-md-3 ps-5" rows="3" v-model="email2"
+                <label for="inputState" class="col-md-1 ps-5">@</label>
+                <select id="inputState" class="form-control col-md-2 ps-5" rows="3" v-model="email2"
                   @change="validateBoxes">
+                  <option value="direct_input">Direct input</option>
                   <option value="vaner.com">vaner.com</option>
                   <option value="daum.net">daum.net</option>
                   <option value="gmail.com">gmail.com</option>
                   <option value="nate.com">nate.com</option>
                   <option value="Hotmail.com">Hotmail.com</option>
                 </select>
+
+                <div class="col-md-3 pe-5 ">
+                  <input v-if="email2 === 'direct_input'" v-model="email3" rows="3" :placeholder="$t('type you domain email')" class="form-control">
+                </div>
+
               </div>
-
               <small class="text-danger col-md-9" v-if="errors.validateEmail">{{ $t('The email is not formatted correctly') }}</small>
-
               <hr class="mx-n3">
-
               <div class="px-5 py-4">
                 <button type="submit" :disabled="isvalid" class="btn btn-primary btn-lg">{{ $t('Register') }}</button>
               </div>
               <small class="text-danger col-md-9" v-if="errorAfterRegis">{{ errorAfterRegis }}</small>
-
             </div>
           </div>
         </div>
@@ -152,7 +127,8 @@
     
     
 <script>
-import axios from "axios"
+import axios from '../../service/axiosService'
+import User from '../../helpers/User'
 
 
 export default {
@@ -171,6 +147,10 @@ export default {
 
       email1: null,
       email2: null,
+      email3: null,
+      isDirectInputLocked: false,
+      
+
       passwordType: "password",
 
       confirmPassword: null,
@@ -201,20 +181,27 @@ export default {
 
   },
 
+  created() {
+    if (!User.loggedIn()) {
+      this.$router.push({ name: 'login' });
+      return;
+    }
+  },
+
   methods: {
     memberInsert() {
-
-      if (this.email2 == null) {
-        this.form.email
+    
+      if(this.email2 === 'direct_input') {
+        this.form.email = this.email1 + '@' + this.email3
       } else {
-        this.form.email = this.email1 + '@' + this.email2
+        this.form.email = this.email1 + '@' + this.email2 
       }
-      axios.post('http://localhost:8080/api/v1/member/register', this.form)
+
+      axios.post('/member/register', this.form)
         .then(() => {
           this.$router.push({ name: 'login' })
         })
         .catch((error) => {
-          console.log(error),
             this.errorAfterRegis = error.response.data.error
         });
     },
@@ -243,9 +230,6 @@ export default {
       //check if password have strange characters
       if (!regex.test(this.form.password)) {
         this.errors.hasErrorNo = true
-        console.log(this.errors.hasErrorNo)
-
-        console.log("password khong thoa man")
         return
       }
 
@@ -254,14 +238,12 @@ export default {
 
       if (typeCount == 2 && (lengPw < 10 || lengPw > 20)) {
         this.errors.hasErrorNo = true
-        console.log("password must be between 10 and 20")
         return
       }
 
       if (typeCount == 3 && (lengPw < 8 || lengPw > 20)) {
         this.errors.hasErrorNo = true
 
-        console.log("password must be between 8 and 20")
         return
       }
 
@@ -276,7 +258,6 @@ export default {
 
             this.errors.hasErrorNo = true
             runIntoList = 1
-            console.log("the password must not be more than 3 number chracters consecutive")
           }
         });
       }
@@ -289,7 +270,7 @@ export default {
 
     },
     checkInputNm() {
-      return /^[a-zA-Z]+$/.test(this.form.name) ? this.errors.hasErrorNm = false : this.errors.hasErrorNm = true
+      return /^[a-zA-Z\s]+$/.test(this.form.name) ? this.errors.hasErrorNm = false : this.errors.hasErrorNm = true
     },
 
     checkInputPh() {
