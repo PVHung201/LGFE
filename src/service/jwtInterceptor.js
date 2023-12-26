@@ -11,11 +11,6 @@ const jwtInterceptor = () => {
           }
           return config
               }
-              //  function () {
-              //   // Do something with request error
-              //   console.log("error into jwtINterceptor")
-                
-              // }
               );
         } 
 }

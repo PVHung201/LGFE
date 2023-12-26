@@ -27,10 +27,6 @@ app.config.globalProperties.$t = i18n.global.t;
 app.config.globalProperties.$i18n = i18n.global;
 
 jwtInterceptor();
-// const apiUrl = process.env.VUE_APP_API_URL;
-
-// axios.defaults.baseURL = apiUrl;window.axios = require('axios');
-
 
 window.axios =axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

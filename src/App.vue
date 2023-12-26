@@ -43,19 +43,9 @@
 import HeaderCom from '@/components/layout/HeaderCom.vue'
 import FooterCom from '@/components/layout/FooterCom.vue'
 import SideBar from '@/components/layout/SideBar.vue'
-import { onMounted } from 'vue'
 import Cookies from 'js-cookie'
 
 export default {
-
-  setup() {
-    onMounted(() => {
-      console.log("test run into onMounted")
-      // Cookies.set("locale", "KO");
-    })
-
-  },
-
 
   component: {
     HeaderCom,
