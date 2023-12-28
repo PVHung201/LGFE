@@ -65,6 +65,22 @@
                     v-if="errors.hasErrorNo"
                     >{{ $t("The password is not formatted correctly") }}</small
                   >
+                  <small
+                    class="text-danger col-md-9"
+                    v-if="errors.hasErrorPhone"
+                    >{{ $t("The name is not formatted correctly") }}</small
+                  >
+                  <small>
+                    *
+                    {{$t("English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.") }}
+                  </small>
+                  <br />
+                  <small>
+                    *
+                    {{
+                      $t("Special characters are !@# Only $%^&* can be entered")
+                    }}</small
+                  >
                 </div>
               </div>
 
@@ -129,22 +145,7 @@
                     @change="checkInputPh()"
                     v-bind:class="{ 'is-invalid': errors.hasErrorPhone }"
                   />
-                  <small
-                    class="text-danger col-md-9"
-                    v-if="errors.hasErrorPhone"
-                    >{{ $t("The name is not formatted correctly") }}</small
-                  >
-                  <small>
-                    *
-                    {{$t("English case/case/special/numeric, 2 combinations (10 - 20 characters), 3 combinations (8-20 characters), serial number not allowed.") }}
-                  </small>
-                  <br />
-                  <small>
-                    *
-                    {{
-                      $t("Special characters are !@# Only $%^&* can be entered")
-                    }}</small
-                  >
+
                 </div>
               </div>
 

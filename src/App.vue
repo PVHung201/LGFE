@@ -1,12 +1,12 @@
 <template>
   <!-- <header-common /> -->
-  <div class="popover" style="left: 60%; top: 15px">
-    <button class="btn btn-light" @click="swichLanguage('KO')">
+  <div class="popover" style="left: 96%; top: 15px" v-show ="$route.path === '/registerMem' || $route.path === '/login' ? true : false">
+    <button class="btn btn-light" style="width: 100%;" @click="swichLanguage('KO')">
       <img src="../public/assets121/img/korea.jpg" width="16" height="11" loading="lazy">
       <span class="mg-left-lv2-i">
         KO </span>
     </button>
-    <button class="btn btn-light" @click="swichLanguage('EN')">
+    <button class="btn btn-light" style="width: 100%;" @click="swichLanguage('EN')">
       <img src="../public/assets121/img/english.png" width="16" height="11" loading="lazy">
       <span class="mg-left-lv2-i">
         EN </span>

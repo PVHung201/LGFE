@@ -117,11 +117,10 @@
                   </div>
                   <div class="btn-group ">
 
-                    <!-- <download-excel class="btn btn-default" :data="members" :fields="json_fields"
-                     worksheet="My Worksheet" name="filename.xlsx"> -->
+                    <!-- <download-excel -->
                     <button type="button" class="btn btn-primary btn-lg mr-3" @click="exportExcel">{{ $t('Excel')
                     }}</button>
-                    <!-- </download-excel> -->
+                    <!-- End </download-excel> -->
 
 
                   </div>
